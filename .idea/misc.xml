@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable-v24/button_bg.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.13703703703703704" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/toast_drawable.xml" value="0.1" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/toast_vonfirm.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_login.xml" value="0.2545454545454545" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_reset_password.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_verify_cedula.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_verify_code.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_verify_session.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/toast_error.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/toast_verify.xml" value="0.19166666666666668" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

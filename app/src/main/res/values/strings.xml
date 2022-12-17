@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EPAPA-COLI</string>
+    <string name="text_logo">Para iniciar sesión, debes utilizar el email y la cédula como contraseña enviado al correo electrónico.</string>
+    <string name="subtitle">Empresa Pública de Agua Potable y Alcantarillado</string>
 </resources>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.epapa_coli">
 
+ <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EPAPACOLI">
+        <activity
+            android:name=".VerifyCedula"
+            android:exported="true" />
+        <activity
+            android:name=".VerifyCode"
+            android:exported="true" />
+        <activity
+            android:name=".VerifySession"
+            android:exported="true" />
+        <activity
+            android:name=".ResetPassword"
+            android:exported="true" />
+        <activity
+            android:name=".Login"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
