@@ -35,17 +35,17 @@ public class Login extends AppCompatActivity {
         Variable();
         usuario_clien = new AsyncHttpClient();
 
-/*        if(Preferences.obtenerPreferenceBoolean(this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
+        if(Preferences.obtenerPreferenceBoolean(this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
             if (Preferences.obtenerPreferenceStringRol(this, Preferences.PREFERENCE_ROL_LOGIN).equals("administrador")) {
-                //Intent intent = new Intent(getApplicationContext(), HomeAdministrador.class);
-                //startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), VerifySession.class);
+                startActivity(intent);
                 Login.super.onBackPressed();
             }else if(Preferences.obtenerPreferenceStringRol(this,Preferences.PREFERENCE_ROL_LOGIN).equals("usuario")){
                 Intent intent = new Intent(getApplicationContext(),VerifySession.class);
                 startActivity(intent);
                 Login.super.onBackPressed();
             }
-        }*/
+        }
 
 
         botonLogin();
@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
                                                 Preferences.guardarPreferenceString(Login.this,edtCorreo.getText().toString(),Preferences.PREFERENCE_USUARIO_LOGIN);
                                                 Preferences.guardarPreferenceStringRol(Login.this,"administrador",Preferences.PREFERENCE_ROL_LOGIN);
                                                 //if(Preferences.obtenerPreferenceBoolean(MainActivity.this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
-                                                startActivity(new Intent(Login.this, VerifySession.class));
+                                                startActivity(new Intent(Login.this, HomeUser.class));
                                                 Login.super.onBackPressed();
                                                 //}
                                                 break;
@@ -140,7 +140,7 @@ public class Login extends AppCompatActivity {
                                                 Preferences.guardarPreferenceString(Login.this,edtCorreo.getText().toString(),Preferences.PREFERENCE_USUARIO_LOGIN);
                                                 Preferences.guardarPreferenceStringRol(Login.this,"usuario",Preferences.PREFERENCE_ROL_LOGIN);
                                                 //if(Preferences.obtenerPreferenceBoolean(MainActivity.this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
-                                                startActivity(new Intent(Login.this, VerifySession.class));
+                                                startActivity(new Intent(Login.this, HomeUser.class));
                                                 Login.super.onBackPressed();
                                                 // }
                                                 break;

@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.epapa_coli">
 
- <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +13,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EPAPACOLI">
+        <activity
+            android:name=".CardPago"
+            android:exported="true" />
+        <activity
+            android:name=".updateUser"
+            android:exported="true" />
+        <activity
+            android:name=".vistaUsuario"
+            android:exported="true" />
+        <activity
+            android:name=".DetallePago"
+            android:exported="true" />
+        <activity
+            android:name=".UpdatePasswordCode"
+            android:exported="true" />
+        <activity
+            android:name=".RegisterCode"
+            android:exported="true" />
+        <activity
+            android:name=".RegisterUsers"
+            android:exported="true" />
+        <activity
+            android:name=".Confirm.ConfirmUpdatePassword"
+            android:exported="true" />
+        <activity
+            android:name=".UpdatePassword"
+            android:exported="true" />
+        <activity
+            android:name=".HomeUser"
+            android:exported="true"
+            android:label="@string/title_activity_home_user" />
+        <activity
+            android:name=".PinCodeVerify"
+            android:exported="true" />
         <activity
             android:name=".VerifyCedula"
             android:exported="true" />

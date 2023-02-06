@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PinCodeVerify">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <com.hanks.passcodeview.PasscodeView
+        android:id="@+id/passcodeview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#212121"
+        app:correctStateColor="#71bb4d"
+        app:firstInputTip="Enter a passcode of 6 digits "
+        app:normalStateColor="#212121"
+        app:numberTextColor="#0a0a0a"
+        app:passcodeLength="6"
+        app:passcodeViewType="set_passcode"
+        app:wrongStateColor="#ea2b46" />
+    </LinearLayout>
+</RelativeLayout>

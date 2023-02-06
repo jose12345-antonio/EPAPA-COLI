@@ -52,96 +52,29 @@
             android:layout_marginTop="20dp"
             android:gravity="center">
         <EditText
-            android:layout_width="40dp"
-            android:layout_height="45dp"
+            android:id="@+id/edtCode"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:layout_marginStart="6dp"
-            android:maxLength="1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:maxLength="6"
             android:textSize="20dp"
             android:textStyle="bold"
             tools:ignore="LabelFor"
             android:textColor="@color/purple_500"/>
 
-            <EditText
-                android:layout_width="40dp"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginStart="6dp"
-                tools:ignore="LabelFor"
-                android:textColor="@color/purple_500"/>
-
-            <EditText
-                android:layout_width="40dp"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:layout_marginStart="6dp"
-                android:maxLength="1"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                tools:ignore="LabelFor"
-                android:textColor="@color/purple_500"/>
-
-            <EditText
-                android:layout_width="40dp"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="20dp"
-                android:layout_marginStart="6dp"
-                android:textStyle="bold"
-                tools:ignore="LabelFor"
-                android:textColor="@color/purple_500"/>
-
-            <EditText
-                android:layout_width="40dp"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:layout_marginStart="6dp"
-                android:maxLength="1"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                tools:ignore="LabelFor"
-                android:textColor="@color/purple_500"/>
-
-            <EditText
-                android:layout_width="40dp"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="20dp"
-                android:layout_marginStart="6dp"
-                android:textStyle="bold"
-                tools:ignore="LabelFor"
-                android:textColor="@color/purple_500"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -152,6 +85,7 @@
                 android:textStyle="bold"
                 android:layout_gravity="right" />
             <TextView
+                android:id="@+id/reenvioCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Obtener nuevo código"
@@ -164,12 +98,12 @@
 
 
         <Button
-            android:id="@+id/btnRecuperarPassword"
+            android:id="@+id/btnCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/button_bg"
             android:padding="10dp"

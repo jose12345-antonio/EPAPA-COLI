@@ -52,16 +52,16 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtCorreoReset"
+                android:id="@+id/edtCedula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:drawableRight="@drawable/ic_baseline_credit_card_24"></com.google.android.material.textfield.TextInputEditText>
+                android:drawableLeft="@drawable/ic_baseline_credit_card_24"
+                android:inputType="number"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <Button
-            android:id="@+id/btnRecuperarPassword"
+            android:id="@+id/btnVerificarCedula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -78,26 +78,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="15dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:text="¿Ya tienes cuenta?"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_gravity="right" />
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Iniciar sesión"
-                android:textSize="16sp"
-                android:textColor="@color/purple_500"
                 android:layout_gravity="right"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp"
+                android:text="Iniciar sesión"
+                android:textColor="@color/purple_500"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
