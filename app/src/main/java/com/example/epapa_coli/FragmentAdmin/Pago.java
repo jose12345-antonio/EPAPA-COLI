@@ -1,5 +1,6 @@
 package com.example.epapa_coli.FragmentAdmin;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,22 +33,82 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
 public class Pago extends Fragment {
 
     List<GetSetFacturaHome> playerlist1;
+    List<GetSetFacturaHome> playerlist2;
     RecyclerView recyclerView;
     RequestQueue request;
+    String dataURL;
+    private int dia,mes,ano;
     JsonObjectRequest jsonObjectRequest;
     String user;
-
+    EditText edtFechaInicio, edtFechaFin;
+    Button btnBuscar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View view = inflater.inflate(R.layout.fragment_pago, container, false);
+        edtFechaFin = view.findViewById(R.id.edtFechaFin);
+        edtFechaFin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                dia=c.get(Calendar.DAY_OF_MONTH);
+                mes=c.get(Calendar.MONTH);
+                ano=c.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        edtFechaFin.setText(year+"-"+(month+1)+"-"+dayOfMonth);
+                    }
+                },ano,mes,dia);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                datePickerDialog.show();
+            }
+        });
+        edtFechaInicio = view.findViewById(R.id.edtFechaInicio);
+        edtFechaInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                dia=c.get(Calendar.DAY_OF_MONTH);
+                mes=c.get(Calendar.MONTH);
+                ano=c.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        edtFechaInicio.setText(year+"-"+(month+1)+"-"+dayOfMonth);
+                    }
+                },ano,mes,dia);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                datePickerDialog.show();
+            }
+        });
+        btnBuscar = view.findViewById(R.id.btnBuscar);
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edtFechaInicio.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), "El campo Fecha Inicio no puede estar vacío", Toast.LENGTH_SHORT).show();
+                } else if (edtFechaFin.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), "El campo Fecha Fin no puede estar vacío", Toast.LENGTH_SHORT).show();
+                } else {
+                    playerlist1.clear();
+                    String ESCUDOS_URL2 = "https://epapa-coli.es/tesis-epapacoli/listarFacturasBusqueda.php?fechaInicio=" + edtFechaInicio.getText().toString()
+                            + "&fechaFin=" + edtFechaFin.getText().toString();
+                    cargarservice2(ESCUDOS_URL2);
+                }
+            }
+        });
         recyclerView = view.findViewById(R.id.recyclerViewPago);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -51,7 +116,6 @@ public class Pago extends Fragment {
         request = Volley.newRequestQueue(getContext());
         cargarservice1("https://epapa-coli.es/tesis-epapacoli/listarFacturas.php");
         return view;
-
     }
 
     private void cargarservice1(String URL) {
@@ -63,7 +127,62 @@ public class Pago extends Fragment {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray1 = jsonObject.getJSONArray("facturasPago");
-                            //playerlist1.clear();
+
+                            System.out.println(jsonArray1);
+                            for (int i = 0; i < jsonArray1.length(); i++) {
+                                JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
+                                String id_pago = jsonObject1.getString("id_pago");
+                                String codigotransaccion = jsonObject1.getString("codigo_transaccion");
+                                String id_transaccion = jsonObject1.getString("id_transaccion");
+                                String id_factura = jsonObject1.getString("id_factura");
+                                String estado_pago = jsonObject1.getString("estado_pago");
+                                String valor_lectura = jsonObject1.getString("valor_lectura");
+                                String consumo_m3 = jsonObject1.getString("consumo_m3");
+                                String estado_lectura = jsonObject1.getString("estado_lectura");
+                                String valor_pago = jsonObject1.getString("valorPago");
+                                String fechaPago = jsonObject1.getString("fechaPago");
+                                String fecha_factura = jsonObject1.getString("fechaFactura");
+                                String totalFactura = jsonObject1.getString("totalFactura");
+                                String fecha_lectura = jsonObject1.getString("fecha_lectura");
+                                String numero_cedula = jsonObject1.getString("numero_cedula");
+                                String codigo_unico = jsonObject1.getString("codigo_unico");
+                                String nombres = jsonObject1.getString("nombres");
+
+                                playerlist1.add(new GetSetFacturaHome(id_pago, codigotransaccion, id_transaccion, id_factura, estado_pago,valor_lectura, consumo_m3, estado_lectura, valor_pago, fechaPago, fecha_factura, totalFactura, fecha_lectura, numero_cedula, codigo_unico, nombres));
+                            }
+                            AdapterFacturaAdmin adaptador = new AdapterFacturaAdmin(playerlist1, getContext());
+                            recyclerView.setAdapter(adaptador);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(stringRequest);
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                requestQueue.getCache().clear();
+            }
+        });
+
+    }
+    private void cargarservice2(String URL) {
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray1 = jsonObject.getJSONArray("facturasPago");
+
                             System.out.println(jsonArray1);
                             for (int i = 0; i < jsonArray1.length(); i++) {
                                 JSONObject jsonObject1 = jsonArray1.getJSONObject(i);

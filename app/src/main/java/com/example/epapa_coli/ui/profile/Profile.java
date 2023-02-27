@@ -79,6 +79,23 @@ public class Profile extends Fragment {
             }
         });
         lnInformacion = view.findViewById(R.id.informacionDate);
+        lnInformacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View alertCustomDialog = LayoutInflater.from(getContext()).inflate(R.layout.dialog_informacion, null);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+                alertDialog.setView(alertCustomDialog);
+
+
+                final AlertDialog alertDialog1 = alertDialog.create();
+                alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog1.show();
+
+
+
+            }
+        });
         lnContacto = view.findViewById(R.id.contactanos);
         lnContacto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +122,10 @@ public class Profile extends Fragment {
                 btnLlamar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("+593967464705"));
-                        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED)
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:0959027838"));
+                        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
                             return;
-                        startActivity(i);
+                        getActivity().startActivity(intent);
                     }
                 });
 

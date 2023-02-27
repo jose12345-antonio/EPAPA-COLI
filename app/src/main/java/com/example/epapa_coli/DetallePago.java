@@ -60,7 +60,6 @@ public class DetallePago extends AppCompatActivity {
         viewTerminos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 View alertCustomDialog = LayoutInflater.from(DetallePago.this).inflate(R.layout.dialog_termino, null);
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetallePago.this);
 

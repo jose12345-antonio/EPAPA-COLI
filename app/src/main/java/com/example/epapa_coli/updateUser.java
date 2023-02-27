@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,6 +25,7 @@ public class updateUser extends AppCompatActivity {
     EditText edtCedulaUpdate, edtCorreoUpdate, edtCelularUpdate;
     Button updateButton;
     String user, cedula;
+    LinearLayout regresarUser;
 
 
     @Override
@@ -31,6 +33,13 @@ public class updateUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user);
         user =  Preferences.obtenerPreferenceString(getApplicationContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
+        regresarUser = findViewById(R.id.regresarUser);
+        regresarUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         edtCedulaUpdate = findViewById(R.id.edtCedulaUpdate);
         edtCorreoUpdate = findViewById(R.id.edtCorreoUpdate);
         edtCelularUpdate = findViewById(R.id.edtCelularUpdate);

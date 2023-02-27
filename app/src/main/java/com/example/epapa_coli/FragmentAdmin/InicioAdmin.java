@@ -44,6 +44,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,8 @@ public class InicioAdmin extends Fragment {
     TextView txtNombre;
     String user;
     CardView cardMedidor;
+    TextView txtTotal;
+    Double total;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,9 +63,11 @@ public class InicioAdmin extends Fragment {
         View view = inflater.inflate(R.layout.fragment_inicio_admin, container, false);
         user =  Preferences.obtenerPreferenceString(getContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
         txtNombre = view.findViewById(R.id.nombreAdmin);
+        txtTotal = view.findViewById(R.id.txtTotal);
         //anyChartView = view.findViewById(R.id.any_chart_view);
         anyChartViewLine = view.findViewById(R.id.any_chart_view_line);
         obtenerUsuario();
+        ObtenerTotal();
         Pie pie = AnyChart.pie();
         Cartesian cartesian = AnyChart.line();
         pie.setOnClickListener(new ListenersInterface.OnClickListener(new String[]{"x", "value"}) {
@@ -221,5 +226,49 @@ public class InicioAdmin extends Fragment {
             }
         });
     }
+    private void ObtenerTotal() {
+        String URL3 = "https://epapa-coli.es/tesis-epapacoli/ObtenerTotalPagoDiario.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL3, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("totalDia");
+
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        total = jsonObject1.getDouble("total");
+                        System.out.println("$ "+obtieneDosDecimales(total));
+                    }
+                    txtTotal.setText("$ "+obtieneDosDecimales(total));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                requestQueue.getCache().clear();
+            }
+        });
     }
+
+    private String obtieneDosDecimales(double valor){
+        DecimalFormat format = new DecimalFormat();
+        format.setMaximumFractionDigits(2); //Define 2 decimales.
+        return format.format(valor);
+    }
+
+}
 

@@ -237,11 +237,50 @@
             </HorizontalScrollView>
 
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total de ventas diarias"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/black"
+                        android:textSize="28dp"
+                        android:layout_marginBottom="6dp"></TextView>
+
+                    <TextView
+                        android:id="@+id/txtTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textColor="@color/black"
+                        android:textSize="26dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="20dp"></TextView>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
             <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reporte de pagos"
-            android:textStyle="normal"
+            android:textStyle="bold"
             android:fontFamily="sans-serif-light"
             android:textSize="20sp"
             android:textColor="@color/black"

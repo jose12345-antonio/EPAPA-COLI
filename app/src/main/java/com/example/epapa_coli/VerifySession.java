@@ -7,13 +7,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -21,6 +25,7 @@ import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -71,6 +76,7 @@ public class VerifySession extends AppCompatActivity {
     KeyGenerator keyGenerator;
     int codeCantidad, codeHuella;
     String user;
+    LinearLayout lytllamanos;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("WrongConstant")
@@ -80,6 +86,18 @@ public class VerifySession extends AppCompatActivity {
         setContentView(R.layout.activity_verify_session);
         getSupportActionBar().hide();
         user =  Preferences.obtenerPreferenceString(getApplicationContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
+
+        lytllamanos = findViewById(R.id.lytllamanos);
+        lytllamanos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:0959027838"));
+                if(ActivityCompat.checkSelfPermission(VerifySession.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+                    return;
+                startActivity(intent);
+            }
+        });
+
         Variable();
         obtenerEstadoHuella();
 
