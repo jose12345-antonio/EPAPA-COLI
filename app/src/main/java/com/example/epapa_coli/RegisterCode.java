@@ -37,7 +37,7 @@ public class RegisterCode extends AppCompatActivity {
         btnRegisterCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL = "https://devtesis.com/tesis-epapacoli/insertCode.php";
+                String URL = "https://epapa-coli.es/tesis-epapacoli/insertCode.php";
                 RegistrarCode(URL);
             }
         });

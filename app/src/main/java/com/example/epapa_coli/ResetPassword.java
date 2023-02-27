@@ -57,7 +57,7 @@ public class ResetPassword extends AppCompatActivity {
     }
 
     private void obtenerCorreo() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/validar_correo.php?usuario="+edtCorreo.getText().toString(), new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/validar_correo.php?usuario="+edtCorreo.getText().toString(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

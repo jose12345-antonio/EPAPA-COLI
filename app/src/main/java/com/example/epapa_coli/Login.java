@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
 
         if(Preferences.obtenerPreferenceBoolean(this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
             if (Preferences.obtenerPreferenceStringRol(this, Preferences.PREFERENCE_ROL_LOGIN).equals("administrador")) {
-                Intent intent = new Intent(getApplicationContext(), VerifySession.class);
+                Intent intent = new Intent(getApplicationContext(), HomeAdmin.class);
                 startActivity(intent);
                 Login.super.onBackPressed();
             }else if(Preferences.obtenerPreferenceStringRol(this,Preferences.PREFERENCE_ROL_LOGIN).equals("usuario")){
@@ -96,7 +96,7 @@ public class Login extends AppCompatActivity {
                     String usuario = edtCorreo.getText().toString().replace(" ", "%20");
                     String password = edtPassword.getText().toString().replace(" ", "%20");
 
-                    String url = "https://devtesis.com/tesis-epapacoli/logear.php?email="+usuario+"&password="+password;
+                    String url = "https://epapa-coli.es/tesis-epapacoli/logear.php?email="+usuario+"&password="+password;
                     //Se sincroniza con la web
                     usuario_clien.post(url, new AsyncHttpResponseHandler() {
                         //almacenar mediante el método onSuccess
@@ -118,9 +118,9 @@ public class Login extends AppCompatActivity {
                                         //Establecer a la variable de la clase Logear_Usuario
                                         //todo lo que se obtiene de la clase JSONObj
                                         user.setId(jsonObj.getInt("id_usuario"));
-                                        user.setPassword(jsonObj.getString("password"));
-                                        user.setRol(jsonObj.getInt("rol_id"));
-                                        user.setNombre_rol(jsonObj.getString("rol_id"));
+                                        user.setPassword(jsonObj.getString("contrasena"));
+                                        user.setRol(jsonObj.getInt("id_rol"));
+                                        user.setNombre_rol(jsonObj.getString("id_rol"));
                                         Intent i = null;
                                         toastVerify();
                                         switch (user.getRol()) {
@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
                                                 Preferences.guardarPreferenceString(Login.this,edtCorreo.getText().toString(),Preferences.PREFERENCE_USUARIO_LOGIN);
                                                 Preferences.guardarPreferenceStringRol(Login.this,"administrador",Preferences.PREFERENCE_ROL_LOGIN);
                                                 //if(Preferences.obtenerPreferenceBoolean(MainActivity.this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
-                                                startActivity(new Intent(Login.this, HomeUser.class));
+                                                startActivity(new Intent(Login.this, HomeAdmin.class));
                                                 Login.super.onBackPressed();
                                                 //}
                                                 break;

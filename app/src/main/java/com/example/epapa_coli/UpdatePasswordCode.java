@@ -38,7 +38,7 @@ public class UpdatePasswordCode extends AppCompatActivity {
         btnUpdatePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL = "https://devtesis.com/tesis-epapacoli/updatePassword.php";
+                String URL = "https://epapa-coli.es/tesis-epapacoli/updatePassword.php";
                 ActualizarDatosPasword(URL);
             }
         });
@@ -53,7 +53,6 @@ public class UpdatePasswordCode extends AppCompatActivity {
             return false;
         }
     }
-
 
     public void ActualizarDatosPasword(String URL){
         if (edtPassword.getText().toString().equals("") || validarPassword() == false) {

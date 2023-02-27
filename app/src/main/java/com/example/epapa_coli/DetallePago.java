@@ -3,6 +3,7 @@ package com.example.epapa_coli;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -30,10 +32,11 @@ import org.w3c.dom.Text;
 
 public class DetallePago extends AppCompatActivity {
     String user;
-    TextView txtConsumoAnterior, txtConsumoActual, txtConsumo, txttotalMes, txttotalPagar, txtMesFactura, viewTerminos;
+    TextView txtConsumoAnterior, txtConsumoActual, txtConsumo, txttotalMes, txttotalPagar, txtMesFactura, viewTerminos, txtaguapotable,txtalcantarillado,
+            txtdesc, txtmedidordetalle;
     CheckBox chTerminoCondiciones;
     int valorconsumo, consumoActual;
-    String fecha;
+    String fecha, pagartotal;
     Button btnPagar;
 
     @Override
@@ -45,28 +48,38 @@ public class DetallePago extends AppCompatActivity {
         txtConsumoActual = findViewById(R.id.consumoActual);
         txtConsumo = findViewById(R.id.totalConsumo);
         txttotalMes = findViewById(R.id.totalConsumoMes);
+
+        txtaguapotable = findViewById(R.id.txtaguapotable);
+        txtalcantarillado = findViewById(R.id.txtalcantarillado);
+        txtdesc = findViewById(R.id.txtdesc);
+
         txttotalPagar = findViewById(R.id.totalPagar);
         txtMesFactura = findViewById(R.id.txtMesFactura);
+        txtmedidordetalle = findViewById(R.id.txtmedidordetalle);
         viewTerminos = findViewById(R.id.viewTerminos);
         viewTerminos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ViewGroup viewGroup = findViewById(android.R.id.content);
-                Button btnCancelar;
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetallePago.this);
-                View view = LayoutInflater.from(DetallePago.this).inflate(R.layout.dialog_termino, viewGroup, false);
-                builder.setCancelable(false);
-                builder.setView(view);
-                btnCancelar = findViewById(R.id.btnCancelar);
-                final AlertDialog alertDialog = builder.create();
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                btnCancelar.setOnClickListener(new View.OnClickListener() {
+
+                View alertCustomDialog = LayoutInflater.from(DetallePago.this).inflate(R.layout.dialog_termino, null);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetallePago.this);
+
+                alertDialog.setView(alertCustomDialog);
+
+                Button btn = (Button) alertCustomDialog.findViewById(R.id.btnCancelar);
+
+                final AlertDialog alertDialog1 = alertDialog.create();
+                alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog1.show();
+                btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        alertDialog.dismiss();
+                        alertDialog1.cancel();
+                        Toast.makeText(getApplicationContext(), "Gracias por revisar los términos y condiciones", Toast.LENGTH_SHORT).show();
                     }
                 });
-                alertDialog.show();
+
+
             }
         });
         chTerminoCondiciones = findViewById(R.id.checTerminoCondiciones);
@@ -76,8 +89,12 @@ public class DetallePago extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (chTerminoCondiciones.isChecked()){
-
-                    startActivity(new Intent(getApplicationContext(), CardPago.class));
+                    Bundle code = new Bundle();
+                    code.putString("pagar", String.valueOf(pagartotal));
+                    Intent i = new Intent(DetallePago.this, CardPago.class);
+                    i.putExtras(code);
+                    startActivity(i);
+                    finish();
                 }else if(!chTerminoCondiciones.isChecked()){
                     Toast.makeText(getApplicationContext(), "Aceptar términos y condiciones", Toast.LENGTH_SHORT).show();
                 }
@@ -86,8 +103,9 @@ public class DetallePago extends AppCompatActivity {
         obtenerFactura();
     }
 
+
     private void obtenerFactura() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/mostrarFactura.php?correo="+user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/mostrarFactura.php?correo="+user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -101,15 +119,20 @@ public class DetallePago extends AppCompatActivity {
                         consumoActual = jsonObject1.getInt("valor_lectura");
                         txtConsumo.setText(jsonObject1.getString("consumo_m3"));
                         valorconsumo = jsonObject1.getInt("consumo_m3");
-                        txttotalMes.setText(jsonObject1.getString("total"));
-                        txttotalPagar.setText(jsonObject1.getString("total"));
+                        txttotalMes.setText("$ "+jsonObject1.getString("total"));
+                        txttotalPagar.setText("$ "+jsonObject1.getString("total"));
+                        pagartotal = jsonObject1.getString("total");
+                        txtaguapotable.setText("$ "+jsonObject1.getString("agua_potable"));
+                        txtalcantarillado.setText("$ "+jsonObject1.getString("alcantarillado"));
                         fecha = jsonObject1.getString("fecha");
+                        txtmedidordetalle.setText(jsonObject1.getString("numero_medidor"));
                     }
 
                     String[] partsFechaHora = fecha.split(" ");
                     String partFecha = partsFechaHora[0];
                     String[] partsFecha = partFecha.split("-");
                     String partMes = partsFecha[1];
+
 
                     if(partMes=="1"){
                         txtMesFactura.setText("Enero");

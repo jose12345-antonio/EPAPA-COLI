@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class vistaUsuario extends AppCompatActivity {
     TextView txtnombres, txtcedula, txtcelular, txtcorreo;
     String user;
     ImageView regresarDate;
+    LinearLayout lineRegres;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +36,17 @@ public class vistaUsuario extends AppCompatActivity {
         txtcorreo = findViewById(R.id.emailView);
         txtnombres = findViewById(R.id.nombresview);
         regresarDate = findViewById(R.id.regresarDate);
+        lineRegres = findViewById(R.id.lineRegres);
         regresarDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        lineRegres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -47,7 +56,7 @@ public class vistaUsuario extends AppCompatActivity {
     }
 
     private void obtenerUsuario() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/listarPerfilUsuario.php?correo="+user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/listarPerfilUsuario.php?correo="+user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

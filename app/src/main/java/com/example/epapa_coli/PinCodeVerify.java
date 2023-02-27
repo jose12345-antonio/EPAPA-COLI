@@ -34,7 +34,7 @@ public class PinCodeVerify extends AppCompatActivity {
     }
 
     private void obtenerCodigo() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/obtenerCodigo.php?correo="+user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/obtenerCodigo.php?correo="+user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -60,11 +60,18 @@ public class PinCodeVerify extends AppCompatActivity {
 
                                     @Override
                                     public void onSuccess(String number) {
-                                        // here is used so that when password
-                                        // is correct user will be
-                                        // directly navigated to next activity
-                                        Intent intent_passcode = new Intent(PinCodeVerify.this, HomeUser.class);
-                                        startActivity(intent_passcode);
+                                        if(Preferences.obtenerPreferenceBoolean(getApplicationContext(),Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
+                                            if (Preferences.obtenerPreferenceStringRol(getApplicationContext(), Preferences.PREFERENCE_ROL_LOGIN).equals("administrador")) {
+                                                Intent intent = new Intent(getApplicationContext(), HomeAdmin.class);
+                                                startActivity(intent);
+                                                PinCodeVerify.super.onBackPressed();
+                                            }else if(Preferences.obtenerPreferenceStringRol(getApplicationContext(),Preferences.PREFERENCE_ROL_LOGIN).equals("usuario")){
+                                                Intent intent = new Intent(getApplicationContext(),HomeUser.class);
+                                                startActivity(intent);
+                                                PinCodeVerify.super.onBackPressed();
+                                            }
+                                        }
+
                                     }
                                 });
                     }

@@ -1,13 +1,21 @@
 package com.example.epapa_coli.ui.profile;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.epapa_coli.DetallePago;
 import com.example.epapa_coli.Login;
 import com.example.epapa_coli.Preferences;
 import com.example.epapa_coli.R;
@@ -71,7 +80,43 @@ public class Profile extends Fragment {
         });
         lnInformacion = view.findViewById(R.id.informacionDate);
         lnContacto = view.findViewById(R.id.contactanos);
-        lnTerminosCondiciones = view.findViewById(R.id.terminoCondiciones);
+        lnContacto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View alertCustomDialog = LayoutInflater.from(getContext()).inflate(R.layout.dialog_contacto, null);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+                alertDialog.setView(alertCustomDialog);
+
+                Button btnWhatsapp = (Button) alertCustomDialog.findViewById(R.id.btnWhatsapp);
+                Button btnLlamar = (Button) alertCustomDialog.findViewById(R.id.btnLlamar);
+
+                btnWhatsapp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        String uri = "whatsapp://send?phone=593967464705";
+                        intent.setData(Uri.parse(uri));
+                        startActivity(intent);
+                    }
+                });
+
+                btnLlamar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("+593967464705"));
+                        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED)
+                            return;
+                        startActivity(i);
+                    }
+                });
+
+                final AlertDialog alertDialog1 = alertDialog.create();
+                alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog1.show();
+            }
+        });
         txtNombres = view.findViewById(R.id.txtNombre);
         txtFechaRegistro = view.findViewById(R.id.fechaRegistro);
 
@@ -88,7 +133,7 @@ public class Profile extends Fragment {
     }
 
     private void obtenerUsuario() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/listarPerfilUsuario.php?correo="+user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/listarPerfilUsuario.php?correo="+user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

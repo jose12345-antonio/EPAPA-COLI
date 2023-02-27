@@ -13,9 +13,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -41,12 +43,12 @@ public class RegisterUsers extends AppCompatActivity {
 
     EditText edtCorreo, edtCelular, edtPassword, edtRepeatPassword;
     String id_cedula, nombres, apellidos;
-    AutoCompleteTextView tipoUsuario;
     int contadorCorreo;
     Button btnNext;
-    DatePickerDialog.OnDateSetListener onDateSetListener;
+    LinearLayout regresarlog;
     ImageView imgReset;
-    int id_tipoUsuario;
+    int estado_huella;
+    CheckBox chhuella;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +59,20 @@ public class RegisterUsers extends AppCompatActivity {
         nombres = getIntent().getStringExtra("nombres");
         apellidos = getIntent().getStringExtra("apellidos");
 
-        tipoUsuario = findViewById(R.id.tipoUser);
         edtCorreo = findViewById(R.id.edtCorreoRegister);
         edtCelular = findViewById(R.id.celularRegister);
         edtPassword = findViewById(R.id.newPasswordRegister);
         edtRepeatPassword = findViewById(R.id.repetPasswordRegister);
         btnNext = findViewById(R.id.btnUsersRegister);
-        llenarspinnerRol();
+        chhuella = findViewById(R.id.chhuella);
+        regresarlog = findViewById(R.id.regresarlog);
+        regresarlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
+            }
+        });
          btnNext.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
@@ -78,6 +87,8 @@ public class RegisterUsers extends AppCompatActivity {
                  finish();
              }
          });
+
+
     }
 
     private void obtenerCorreo() {
@@ -88,7 +99,7 @@ public class RegisterUsers extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("email");
                     contadorCorreo = jsonArray.length();
-                    RegistrarUsuario("https://devtesis.com/tesis-epapacoli/insertar_usuario.php");
+                    RegistrarUsuario("https://epapa-coli.es/tesis-epapacoli/insertar_usuario.php");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -133,6 +144,10 @@ public class RegisterUsers extends AppCompatActivity {
     }
 
     public void RegistrarUsuario(String URL){
+
+        estado_huella = (chhuella.isChecked() ? 1 : 0);
+        Toast.makeText(getApplicationContext(), ""+estado_huella, Toast.LENGTH_SHORT).show();
+
         if (edtCorreo.getText().toString().equals("")){
             edtCorreo.setError("El campo está vacío");
         }else if(ValidationEmail()==false){
@@ -164,7 +179,7 @@ public class RegisterUsers extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "No se pudo registrar", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "No se pudo registrar", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
@@ -173,7 +188,7 @@ public class RegisterUsers extends AppCompatActivity {
                     params.put("email", edtCorreo.getText().toString());
                     params.put("celular", edtCelular.getText().toString());
                     params.put("password", edtPassword.getText().toString());
-                    params.put("tipoUsuario", String.valueOf(id_tipoUsuario));
+                    params.put("huella", String.valueOf(estado_huella));
                     params.put("cedula", id_cedula);
 
 
@@ -202,54 +217,5 @@ public class RegisterUsers extends AppCompatActivity {
         javaMailAPI.execute();
     }
 
-    public void llenarspinnerRol() {
-        String URL = "https://devtesis.com/tesis-epapacoli/tipoUsuario.php";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    final ArrayList<GetSetTipoUsuario> listRol = new ArrayList<GetSetTipoUsuario>();
-
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("tipoUsuario");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
-                        GetSetTipoUsuario p = new GetSetTipoUsuario();
-                        p.setId_tipoUsuario(jsonObject1.getInt("id_tipoUsuario"));
-                        p.setNombre_tipoUsuario(jsonObject1.getString("nombre_tipoUsuario"));
-                        listRol.add(p);
-
-                    }
-                    ArrayAdapter<GetSetTipoUsuario> tipoRol = new ArrayAdapter<GetSetTipoUsuario>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, listRol);
-                    tipoUsuario.setAdapter(tipoRol);
-                    tipoUsuario.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            id_tipoUsuario = listRol.get(i).getId_tipoUsuario();
-                        }
-                    });
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
-            @Override
-            public void onRequestFinished(Request<Object> request) {
-                requestQueue.getCache().clear();
-            }
-        });
-    }
 
 }

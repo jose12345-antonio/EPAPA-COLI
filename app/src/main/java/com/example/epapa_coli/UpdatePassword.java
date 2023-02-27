@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,25 +29,36 @@ public class UpdatePassword extends AppCompatActivity {
     Button btnUpdatePassword;
     String user;
     ImageView imgRegress;
+    LinearLayout regresarLe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_password);
         user =  Preferences.obtenerPreferenceString(getApplicationContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
         imgRegress = findViewById(R.id.imgRegress);
+
         imgRegress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+
+        regresarLe = findViewById(R.id.regresarLe);
+        regresarLe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         edtPassword = findViewById(R.id.newPassword);
         edtConfirmPassword = findViewById(R.id.confirmPassword);
         btnUpdatePassword = findViewById(R.id.btnUpdatePassword);
         btnUpdatePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL = "https://devtesis.com/tesis-epapacoli/updatePassword.php";
+                String URL = "https://epapa-coli.es/tesis-epapacoli/updatePassword.php";
                 ActualizarDatosPasword(URL);
             }
         });

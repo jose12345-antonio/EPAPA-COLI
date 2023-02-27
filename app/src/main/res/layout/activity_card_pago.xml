@@ -6,32 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".CardPago">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="15dp"
-            android:orientation="vertical">
-
-                <com.paymentez.android.view.CardMultilineWidget
-                    android:id="@+id/card_multiline_widget"
+                <WebView
+                    android:id="@+id/webViewPago"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    app:shouldShowPaymentezLogo="true"
-                    tools:ignore="MissingClass" />
-
-        <Button
-            android:id="@+id/buttonAddCard"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:background="@drawable/button_bg"
-            android:padding="12sp"
-            android:layout_marginTop="20dp"
-            android:layout_height="wrap_content"
-            android:text="Proceder a pagar" />
-
-        </LinearLayout>
+                    android:layout_height="match_parent"
+                    ></WebView>
 
 </RelativeLayout>

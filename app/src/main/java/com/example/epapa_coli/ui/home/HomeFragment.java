@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
     JsonObjectRequest jsonObjectRequest;
     String user;
     int estado;
-    TextView txtestado, txttotalFactura, txtNombresHome;
+    TextView txtestado, txttotalFactura, txtNombresHome, txtMensaje, txtmedidor, txtcodigo;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -63,6 +63,8 @@ public class HomeFragment extends Fragment {
         txtestado = root.findViewById(R.id.estadoPago);
         txttotalFactura = root.findViewById(R.id.totalFactura);
         txtNombresHome = root.findViewById(R.id.txtNombresHome);
+        txtMensaje = root.findViewById(R.id.txtMensaje);
+        txtmedidor = root.findViewById(R.id.medidor);
         cardPago= root.findViewById(R.id.cardPago);
         obtenerUsuario();
         obtenerFactura();
@@ -82,27 +84,37 @@ public class HomeFragment extends Fragment {
     private void cargarservice1() {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://devtesis.com/tesis-epapacoli/listar_pagos.php?correo="+user,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://epapa-coli.es/tesis-epapacoli/listar_pagos.php?correo="+user,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray1 = jsonObject.getJSONArray("pago");
-                            playerlist1.clear();
-                            for (int i = 0; i < jsonArray1.length(); i++) {
-                                JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
-                                int id = jsonObject1.getInt("id_pago");
-                                Double valorPago = jsonObject1.getDouble("valor");
-                                String codigo_transaccion = jsonObject1.getString("codigo_transaccion");
-                                String fechaPago = jsonObject1.getString("fecha_pago");
-                                String fechaFactura = jsonObject1.getString("fecha_factura");
-                                String razon_social = jsonObject1.getString("razon_social");
+                            int contador = jsonArray1.length();
+                            if(contador==0){
+                                txtMensaje.setVisibility(View.VISIBLE);
+                                recyclerView.setVisibility(View.GONE);
+                            }else{
+                                txtMensaje.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
 
-                                playerlist1.add(new GetSetPago(id, valorPago, codigo_transaccion, fechaPago, fechaFactura, razon_social));
+                                //playerlist1.clear();
+                                for (int i = 0; i < jsonArray1.length(); i++) {
+                                    JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
+                                    int id = jsonObject1.getInt("id_pago");
+                                    Double valorPago = jsonObject1.getDouble("valor");
+                                    String codigo_transaccion = jsonObject1.getString("codigo_transaccion");
+                                    String fechaPago = jsonObject1.getString("fecha_pago");
+                                    String fechaFactura = jsonObject1.getString("fecha_factura");
+                                    String razon_social = jsonObject1.getString("razon_social");
+
+                                    playerlist1.add(new GetSetPago(id, valorPago, codigo_transaccion, fechaPago, fechaFactura, razon_social));
+                                }
+                                AdapterListPago adaptador = new AdapterListPago(playerlist1, getContext());
+                                recyclerView.setAdapter(adaptador);
                             }
-                            AdapterListPago adaptador = new AdapterListPago(playerlist1, getContext());
-                            recyclerView.setAdapter(adaptador);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -126,26 +138,37 @@ public class HomeFragment extends Fragment {
     }
 
     private void obtenerFactura() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/mostrarFactura.php?correo="+user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/mostrarFactura.php?correo="+user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-
                     JSONArray jsonArray = jsonObject.getJSONArray("facturas");
+                    int contador = jsonArray.length();
+                    if(contador==0){
+                        txtestado.setText("No mantiene factura generada");
+                        txttotalFactura.setText("$ 0,00");
+                        cardPago.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-                    for(int i=0;i<jsonArray.length();i++){
-                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        estado = jsonObject1.getInt("estado_pago");
-                        txttotalFactura.setText("$ "+jsonObject1.getString("total"));
-                    }
-                    if (estado==1){
-                        txtestado.setText("Pagado");
-                        txttotalFactura.setText("$ 0.00");
-                    }else if(estado==0) {
-                        txtestado.setText("Pendiente");
-                    }
-                       cardPago.setOnClickListener(new View.OnClickListener() {
+                                    Toast.makeText(getContext(), "No mantiene factura generada", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else{
+                        for(int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            estado = jsonObject1.getInt("estado_pago");
+                            txttotalFactura.setText("$ "+jsonObject1.getString("total"));
+                            txtmedidor.setText("Nro° "+jsonObject1.getString("numero_medidor"));
+                        }
+                        if (estado==1){
+                            txtestado.setText("Pagado");
+                            txttotalFactura.setText("$ 0.00");
+                        }else if(estado==0) {
+                            txtestado.setText("Pendiente");
+                        }
+                        cardPago.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 if (estado==1){
@@ -157,6 +180,9 @@ public class HomeFragment extends Fragment {
                                 }
                             }
                         });
+
+
+                    }
 
 
                 } catch (JSONException e) {
@@ -181,7 +207,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void obtenerUsuario() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/listarPerfilUsuario.php?correo="+user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/listarPerfilUsuario.php?correo="+user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

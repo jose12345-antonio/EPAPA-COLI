@@ -41,40 +41,6 @@
             android:layout_margin="20dp"
             android:orientation="horizontal">
             <androidx.cardview.widget.CardView
-                android:id="@+id/credencialSession"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:elevation="10dp"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:layout_gravity="center">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_supervised_user_circle_24"
-                        android:tint="@color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Credenciales"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
                 android:id="@+id/cardHuella"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -83,8 +49,8 @@
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     android:padding="8dp">
@@ -102,7 +68,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:fontFamily="sans-serif"
-                        android:text="Huella"
+                        android:text="Huella | Face"
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -117,8 +83,8 @@
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     android:padding="8dp">

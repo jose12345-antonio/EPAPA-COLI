@@ -23,12 +23,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.epapa_coli.Model.GetSetCliente;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +47,8 @@ import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executor;
 
 import javax.crypto.BadPaddingException;
@@ -59,13 +63,13 @@ public class VerifySession extends AppCompatActivity {
     CardView credencialSession, biometricSession, pinSession;
     private Executor executor;
     private BiometricPrompt biometricPrompt;
-    private BiometricPrompt.PromptInfo promptInfo;
+    private BiometricPrompt.PromptInfo promptInfo, promptInfo2;
     public static final int BIOMETRIC_STRONG = 15;
     public static final int BIOMETRIC_WEAK = 255;
     public static final int DEVICE_CREDENTIAL = 32768;
     KeyStore keyStore;
     KeyGenerator keyGenerator;
-    int codeCantidad;
+    int codeCantidad, codeHuella;
     String user;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -77,45 +81,34 @@ public class VerifySession extends AppCompatActivity {
         getSupportActionBar().hide();
         user =  Preferences.obtenerPreferenceString(getApplicationContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
         Variable();
-        verificacionBiometrica();
-        executor= ContextCompat.getMainExecutor(this);
-        biometricPrompt = new BiometricPrompt(VerifySession.this, executor, new BiometricPrompt.AuthenticationCallback() {
-            @Override
-            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-                super.onAuthenticationError(errorCode, errString);
-                Toast.makeText(getApplicationContext(), "Error de autenticación"+errString, Toast.LENGTH_SHORT).show();
-            }
+        obtenerEstadoHuella();
 
-            @Override
-            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-                super.onAuthenticationSucceeded(result);
-                String plaintext="huellaDactilar";
-                byte[] encryptedInfo = new byte[0];
-                try {
-                    encryptedInfo = result.getCryptoObject().getCipher().doFinal(
-                            // plaintext-string text is whatever data the developer would like
-                            // to encrypt. It happens to be plain-text in this example, but it
-                            // can be anything
-                            plaintext.getBytes(Charset.defaultCharset()));
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
-                    e.printStackTrace();
+
+            verificacionBiometrica();
+            executor= ContextCompat.getMainExecutor(this);
+            biometricPrompt = new BiometricPrompt(VerifySession.this, executor, new BiometricPrompt.AuthenticationCallback() {
+                @Override
+                public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                    super.onAuthenticationError(errorCode, errString);
+                    Toast.makeText(getApplicationContext(), "Error de autenticación"+errString, Toast.LENGTH_SHORT).show();
                 }
-                Log.d("MY_APP_TAG", "Encrypted information: " +
-                        Arrays.toString(encryptedInfo));
-                Toast.makeText(getApplicationContext(), "Verificación correcta", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), HomeUser.class));
-                finish();
-            }
 
-            @Override
-            public void onAuthenticationFailed() {
-                super.onAuthenticationFailed();
-                Toast.makeText(getApplicationContext(), "Fallo en la autenticación", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                    super.onAuthenticationSucceeded(result);
+                    String plaintext="huellaDactilar";
 
+                    Toast.makeText(getApplicationContext(), "Verificación correcta", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), HomeUser.class));
+                    finish();
+                }
+
+                @Override
+                public void onAuthenticationFailed() {
+                    super.onAuthenticationFailed();
+                    Toast.makeText(getApplicationContext(), "Fallo en la autenticación", Toast.LENGTH_SHORT).show();
+                }
+            });
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 generateSecretKey(new KeyGenParameterSpec.Builder(
@@ -142,58 +135,31 @@ public class VerifySession extends AppCompatActivity {
         promptInfo= new BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Autenticación Biométrica")
                 .setSubtitle("Inicio de sesión mediante Huella dactilar")
-                .setAllowedAuthenticators(BIOMETRIC_STRONG | DEVICE_CREDENTIAL)
+                .setAllowedAuthenticators(BIOMETRIC_STRONG | BIOMETRIC_WEAK | DEVICE_CREDENTIAL)
                 .build();
 
         biometricSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cipher cipher = null;
-                try {
-                    cipher = getCipher();
-                } catch (NoSuchPaddingException e) {
-                    e.printStackTrace();
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
+                if (codeHuella == 0) {
+                    mostrarMensajeHuella();
+                } else if (codeHuella == 1) {
+
+                    biometricPrompt.authenticate(promptInfo);
+
+
+                    //System.out.println(keyStore.getKey());
+
                 }
-                SecretKey secretKey = null;
-                try {
-                    secretKey = getSecretKey();
-                } catch (KeyStoreException e) {
-                    e.printStackTrace();
-                } catch (CertificateException e) {
-                    e.printStackTrace();
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (UnrecoverableKeyException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-                } catch (InvalidKeyException e) {
-                    e.printStackTrace();
-                }
-
-
-                biometricPrompt.authenticate(promptInfo, new BiometricPrompt.CryptoObject(cipher));
-                System.out.println("Generator "+keyGenerator);
-
-                //System.out.println(keyStore.getKey());
-
             }
         });
+
+
+
     }
 
     private void Variable(){
-        credencialSession = findViewById(R.id.credencialSession);
-        credencialSession.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Login.class));
-            }
-        });
+
         biometricSession = findViewById(R.id.cardHuella);
         pinSession = findViewById(R.id.passcode);
         pinSession.setOnClickListener(new View.OnClickListener() {
@@ -252,7 +218,7 @@ public class VerifySession extends AppCompatActivity {
     }
 
     public void obtenerCode(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/obtenerCodigo.php?correo="+user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/obtenerCodigo.php?correo="+user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -290,7 +256,40 @@ public class VerifySession extends AppCompatActivity {
             }
         });
     }
+    public void obtenerEstadoHuella(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/obtenerHuella.php?correo="+user, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
 
+                    JSONArray jsonArray = jsonObject.getJSONArray("huella");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        codeHuella = jsonObject1.getInt("codigo");
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                requestQueue.getCache().clear();
+            }
+        });
+    }
     public void mostrarMensaje(){
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
         dialogo1.setTitle("NO REGISTRO PIN");
@@ -312,5 +311,48 @@ public class VerifySession extends AppCompatActivity {
         });
         dialogo1.show();
     }
+
+    public void mostrarMensajeHuella(){
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        dialogo1.setTitle("NO TIENE ACCESO HABILITADO");
+        dialogo1.setMessage("¿Desea habilitar la huella para mayor seguridad?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                UpdateHuella("https://devtesis.com/tesis-epapacoli/update_huella.php?correo="+user);
+                startActivity(new Intent(getApplicationContext(), VerifySession.class));
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.cancel();
+            }
+        });
+        dialogo1.show();
+    }
+
+    public void UpdateHuella(String URL){
+
+            final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(getApplicationContext(), "Se habilitó la huella dactillar", Toast.LENGTH_SHORT).show();
+                    //sendMail();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //Toast.makeText(getApplicationContext(), "No se pudo registrar", Toast.LENGTH_SHORT).show();
+                }
+            });
+            queue.add(stringRequest);
+            queue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+                @Override
+                public void onRequestFinished(Request<Object> request) {
+                    queue.getCache().clear();
+                }
+            });
+        }
 
 }

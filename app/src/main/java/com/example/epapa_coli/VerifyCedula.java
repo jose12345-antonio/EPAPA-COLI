@@ -49,7 +49,7 @@ public class VerifyCedula extends AppCompatActivity {
     }
 
     private void obtenerRegistro() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/obtenerUsers.php?cedula="+edtCedula.getText().toString(), new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/obtenerUsers.php?cedula="+edtCedula.getText().toString(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -95,7 +95,7 @@ public class VerifyCedula extends AppCompatActivity {
     }
 
     private void obtenerCedula() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://devtesis.com/tesis-epapacoli/validar_cedula.php?cedula="+edtCedula.getText().toString(), new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/validar_cedula.php?cedula="+edtCedula.getText().toString(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

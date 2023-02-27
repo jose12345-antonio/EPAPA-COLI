@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FragmentAdmin.InicioAdmin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nombreAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardClientes"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardElevation="10dp"
+                        android:layout_margin="4dp">
+                        <LinearLayout
+                            android:layout_width="7dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:background="@color/purple_500"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:id="@+id/txtUsuario"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10"
+                                android:layout_gravity="center"
+                                android:textSize="80dp"
+                                android:textColor="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_baseline_person_24"
+                                    android:layout_marginRight="5dp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Clientes"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:textSize="18sp"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardFacturas"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardElevation="10dp"
+                        android:layout_margin="4dp">
+                        <LinearLayout
+                            android:layout_width="7dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:background="@color/purple_500"></LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:id="@+id/txtfacturas"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="15"
+                                android:layout_gravity="center"
+                                android:textSize="80dp"
+                                android:textColor="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_baseline_checklist_24"
+                                    android:layout_marginRight="5dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Facturas"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:textSize="18sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardMedidor"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardElevation="10dp"
+                        android:layout_margin="4dp">
+                        <LinearLayout
+                            android:layout_width="7dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:background="@color/purple_500"></LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:id="@+id/txtmedidor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="15"
+                                android:layout_gravity="center"
+                                android:textSize="80dp"
+                                android:textColor="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_baseline_checklist_24"
+                                    android:layout_marginRight="5dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Medidor"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:textSize="18sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardPagos"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardElevation="10dp"
+                        android:layout_margin="4dp">
+
+                        <LinearLayout
+                            android:layout_width="7dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:background="@color/purple_500"></LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:id="@+id/txtPago"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12"
+                                android:layout_gravity="center"
+                                android:textSize="80dp"
+                                android:textColor="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_baseline_monetization_on_24"
+                                    android:layout_marginRight="5dp"
+                                    android:tint="@color/black"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Pagos"
+                                    android:gravity="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reporte de pagos"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif-light"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"/>
+        <com.anychart.AnyChartView
+            android:id="@+id/any_chart_view_line"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="10dp"
+            />
+
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>

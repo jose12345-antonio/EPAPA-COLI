@@ -22,7 +22,6 @@ import com.google.android.material.navigation.NavigationBarView;
 public class HomeUser extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-
     HomeFragment inicio = new HomeFragment();
     DashboardFragment dashboard = new DashboardFragment();
     NotificationsFragment notificaciones = new NotificationsFragment();
@@ -33,6 +32,8 @@ public class HomeUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_user);
+
+        getSupportActionBar().hide();
 
         bottomNavigationView = findViewById(R.id.nav_view);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, inicio).commit();

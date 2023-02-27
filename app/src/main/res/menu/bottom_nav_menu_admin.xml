@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/inicioAdmin"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Inicio" />
+
+    <item
+        android:id="@+id/clientes"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Clientes" />
+
+    <item
+        android:id="@+id/pagos"
+        android:icon="@drawable/ic_baseline_monetization_on_24"
+        android:title="Pagos" />
+
+    <item
+        android:id="@+id/profileAdmin"
+        android:icon="@drawable/person_date"
+        android:title="Perfil" />
+
+
+</menu>
