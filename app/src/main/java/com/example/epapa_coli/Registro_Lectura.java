@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class Registro_Lectura extends AppCompatActivity {
 
-    EditText edtlecturaactual, edtconsumo, edtpotable, edtalcantarillado;
+    EditText edtlecturaactual, edtconsumo, edtpotable, edtalcantarillado, edtTotal;
     String id_cliente, id_tipoUsuario;
     int lecturaAnt, total;
     int estadoActual;
@@ -58,6 +58,7 @@ public class Registro_Lectura extends AppCompatActivity {
         edtlecturaactual = findViewById(R.id.lecturaactualRe);
         edtconsumo = findViewById(R.id.consumom3Re);
         edtpotable = findViewById(R.id.aguapotable);
+        edtTotal = findViewById(R.id.edtTotal);
         edtalcantarillado = findViewById(R.id.alcantarilladoRe);
 
         edtlecturaactual.addTextChangedListener(new TextWatcher() {
@@ -73,26 +74,37 @@ public class Registro_Lectura extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                estadoActual = Integer.parseInt(edtlecturaactual.getText().toString());
-                total =  estadoActual - lecturaAnt;
-                //Calculo para el agua potable
-                //Cobro $0,30 por cada m3
+                String actu = edtlecturaactual.getText().toString();
+                if(!actu.equals("")) {
+                    estadoActual = Integer.parseInt(actu);
+                    total = estadoActual - lecturaAnt;
+                    //Calculo para el agua potable
+                    //Cobro $0,30 por cada m3
 
-                potable = (double) (total*0.3);
-                //Calculo para el alcantarillado
-                //Cobro $0,14
-                alcantarillado = (double) (total*0.14);
-                totalDesc = (potable+alcantarillado)*desc;
-                totalPagar = (double) (potable + alcantarillado - totalDesc);
+                    potable = (double) (total * 0.3);
+                    //Calculo para el alcantarillado
+                    //Cobro $0,14
+                    alcantarillado = (double) (total * 0.14);
+                    totalDesc = (potable + alcantarillado) * desc;
+                    totalPagar = (double) (potable + alcantarillado - totalDesc);
 
-                if(estadoActual>=lecturaAnt){
-                    edtconsumo.setText(""+total);
-                    edtpotable.setText(""+obtieneDosDecimales(potable));
-                    edtalcantarillado.setText(""+obtieneDosDecimales(alcantarillado));
+
+                    if (estadoActual >= lecturaAnt) {
+                        edtconsumo.setText("" + total);
+                        edtpotable.setText("" + obtieneDosDecimales(potable));
+                        edtalcantarillado.setText("" + obtieneDosDecimales(alcantarillado));
+                        edtTotal.setText("$" + String.valueOf(totalPagar));
+                    } else {
+                        edtconsumo.setText("");
+                        edtpotable.setText("");
+                        edtalcantarillado.setText("");
+                        edtTotal.setText("$0");
+                    }
                 }else{
                     edtconsumo.setText("");
                     edtpotable.setText("");
                     edtalcantarillado.setText("");
+                    edtTotal.setText("$0");
                 }
             }
         });
@@ -183,7 +195,7 @@ public class Registro_Lectura extends AppCompatActivity {
                     params.put("alcantarillado", edtalcantarillado.getText().toString());
                     params.put("id", id_cliente);
                     params.put("pagar", String.valueOf(totalPagar));
-
+                    System.out.println(params);
                     return params;
 
                 }

@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.epapa_coli.Model.GetSetCategoriaUsuario;
 import com.example.epapa_coli.Model.GetSetDocumento;
 import com.example.epapa_coli.Model.GetSetTipoUsuario;
 
@@ -39,8 +40,8 @@ import java.util.Map;
 
 public class Registro_Cliente extends AppCompatActivity {
 
-    int id_tipoUsuario, id_tipoDocumento;
-    AutoCompleteTextView tipoUsuario, tipoDocumento;
+    int id_tipoUsuario, id_tipoDocumento, id_categoriaUsuario;
+    AutoCompleteTextView tipoUsuario, tipoDocumento, categoriaUser;
     DatePickerDialog.OnDateSetListener onDateSetListener;
     String fecha;
     EditText edtFecha, edtnombre, edtapellido, edtdireccion, edtCedula, edtcodigo;
@@ -56,6 +57,7 @@ public class Registro_Cliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_cliente);
         tipoUsuario = findViewById(R.id.tipoUser);
+        categoriaUser = findViewById(R.id.categoriaUser);
         tipoDocumento = findViewById(R.id.tipoDocumento);
         edtFecha = findViewById(R.id.fechaClientes);
         edtnombre = findViewById(R.id.nombreClientes);
@@ -73,6 +75,7 @@ public class Registro_Cliente extends AppCompatActivity {
         Fecha();
         llenarspinnerRol();
         llenarspinnerDocumento();
+        llenarspinnerCategoria();
     }
     public void llenarspinnerRol() {
         String URL = "https://epapa-coli.es/tesis-epapacoli/tipoUsuario.php";
@@ -100,6 +103,56 @@ public class Registro_Cliente extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             id_tipoUsuario = listRol.get(i).getId_tipoUsuario();
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                requestQueue.getCache().clear();
+            }
+        });
+    }
+
+    public void llenarspinnerCategoria() {
+        String URL = "https://epapa-coli.es/tesis-epapacoli/categoriaUsuario.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    final ArrayList<GetSetCategoriaUsuario> listCategoria = new ArrayList<GetSetCategoriaUsuario>();
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("categoriaUsuario");
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                        GetSetCategoriaUsuario p = new GetSetCategoriaUsuario();
+                        p.setId_categoriaUsuario(jsonObject1.getInt("id_categoriaUsuario"));
+                        p.setNombre_categoriaUsuario(jsonObject1.getString("nombre_categoriaUsuario"));
+                        listCategoria.add(p);
+
+                    }
+                    ArrayAdapter<GetSetCategoriaUsuario> tipoRol = new ArrayAdapter<GetSetCategoriaUsuario>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, listCategoria);
+                    categoriaUser.setAdapter(tipoRol);
+                    categoriaUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            id_categoriaUsuario = listCategoria.get(i).getId_categoriaUsuario();
                         }
                     });
 
@@ -254,6 +307,7 @@ public class Registro_Cliente extends AppCompatActivity {
                     params.put("fecha", edtFecha.getText().toString());
                     params.put("direccion", edtdireccion.getText().toString());
                     params.put("cargo", String.valueOf(id_tipoUsuario));
+                    params.put("categoria", String.valueOf(id_categoriaUsuario));
 
                     return params;
                 }

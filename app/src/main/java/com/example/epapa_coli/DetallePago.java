@@ -35,7 +35,7 @@ public class DetallePago extends AppCompatActivity {
     TextView txtConsumoAnterior, txtConsumoActual, txtConsumo, txttotalMes, txttotalPagar, txtMesFactura, viewTerminos, txtaguapotable,txtalcantarillado,
             txtdesc, txtmedidordetalle;
     CheckBox chTerminoCondiciones;
-    int valorconsumo, consumoActual;
+    int valorconsumo, consumoActual, id_factura;
     String fecha, pagartotal;
     Button btnPagar;
 
@@ -90,6 +90,7 @@ public class DetallePago extends AppCompatActivity {
                 if (chTerminoCondiciones.isChecked()){
                     Bundle code = new Bundle();
                     code.putString("pagar", String.valueOf(pagartotal));
+                    code.putString("id", String.valueOf(id_factura));
                     Intent i = new Intent(DetallePago.this, CardPago.class);
                     i.putExtras(code);
                     startActivity(i);
@@ -114,6 +115,7 @@ public class DetallePago extends AppCompatActivity {
 
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        id_factura = jsonObject1.getInt("id_factura");
                         txtConsumoActual.setText(jsonObject1.getString("valor_lectura"));
                         consumoActual = jsonObject1.getInt("valor_lectura");
                         txtConsumo.setText(jsonObject1.getString("consumo_m3"));

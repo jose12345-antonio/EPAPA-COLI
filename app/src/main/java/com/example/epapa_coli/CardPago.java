@@ -22,7 +22,7 @@ public class CardPago extends AppCompatActivity {
 
 
     WebView webViewPago;
-    String user, totalPagar;
+    String user, totalPagar, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,13 @@ public class CardPago extends AppCompatActivity {
 
         user =  Preferences.obtenerPreferenceString(getApplicationContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
         totalPagar = getIntent().getStringExtra("pagar");
+        id = getIntent().getStringExtra("id");
         webViewPago = findViewById(R.id.webViewPago);
         webViewPago.getSettings().setJavaScriptEnabled(true);
 
         //System.out.println("https://devtesis.com/tesis-epapacoli/pago_tarjeta.php?correo="+user+"&valor="+totalPagar);
 
-        webViewPago.loadUrl("https://epapa-coli.es/tesis-epapacoli/pago_tarjeta.php?correo="+user+"&valor="+totalPagar);
+        webViewPago.loadUrl("https://epapa-coli.es/tesis-epapacoli/pago_tarjeta.php?correo="+user+"&valor="+totalPagar+"&id="+id);
 
 
     }
