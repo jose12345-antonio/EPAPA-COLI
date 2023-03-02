@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EPAPACOLI">
         <activity
+            android:name=".AsignacionMedidor"
+            android:exported="true" />
+        <activity
             android:name=".RegistroMedidor"
             android:exported="true" />
         <activity

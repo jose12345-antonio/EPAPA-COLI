@@ -146,7 +146,6 @@ public class RegisterUsers extends AppCompatActivity {
     public void RegistrarUsuario(String URL){
 
         estado_huella = (chhuella.isChecked() ? 1 : 0);
-        Toast.makeText(getApplicationContext(), ""+estado_huella, Toast.LENGTH_SHORT).show();
 
         if (edtCorreo.getText().toString().equals("")){
             edtCorreo.setError("El campo está vacío");

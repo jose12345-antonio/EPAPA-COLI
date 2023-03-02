@@ -67,7 +67,7 @@ public class RegistroMedidor extends AppCompatActivity {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(getApplicationContext(), "Se registró exitosamente la lectura", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Se registró exitosamente", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), HomeAdmin.class));
                     finish();
                     //sendMail();

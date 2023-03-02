@@ -56,6 +56,9 @@ public class InicioAdmin extends Fragment {
     CardView cardMedidor;
     TextView txtTotal;
     Double total;
+    String pago, medidor, cliente, facturas;
+    TextView txtUsuario,txtfacturas,txtmedidor, txtPago;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +67,14 @@ public class InicioAdmin extends Fragment {
         user =  Preferences.obtenerPreferenceString(getContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
         txtNombre = view.findViewById(R.id.nombreAdmin);
         txtTotal = view.findViewById(R.id.txtTotal);
+
+        txtfacturas = view.findViewById(R.id.txtfacturas);
+        txtPago = view.findViewById(R.id.txtPago);
+        txtmedidor = view.findViewById(R.id.txtmedidor);
+        txtUsuario = view.findViewById(R.id.txtUsuario);
+
+        listar();
+
         //anyChartView = view.findViewById(R.id.any_chart_view);
         anyChartViewLine = view.findViewById(R.id.any_chart_view_line);
         obtenerUsuario();
@@ -263,6 +274,51 @@ public class InicioAdmin extends Fragment {
             }
         });
     }
+
+    private void listar() {
+        String URL3 = "https://epapa-coli.es/tesis-epapacoli/listarDatosAdmin.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL3, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("datos");
+
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        pago = jsonObject1.getString("pagos");
+                        medidor = jsonObject1.getString("medidor");
+                        facturas = jsonObject1.getString("facturas");
+                        cliente = jsonObject1.getString("clientes");
+
+                    }
+                    txtfacturas.setText(facturas);
+                    txtmedidor.setText(medidor);
+                    txtUsuario.setText(cliente);
+                    txtPago.setText(pago);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                requestQueue.getCache().clear();
+            }
+        });
+    }
+
 
     private String obtieneDosDecimales(double valor){
         DecimalFormat format = new DecimalFormat();

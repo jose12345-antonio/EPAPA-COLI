@@ -230,7 +230,9 @@ public class Registro_Cliente extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     Toast.makeText(getApplicationContext(), "El cliente fue registrado exitosamente", Toast.LENGTH_SHORT).show();
-                    mostrarMensaje();
+                    //mostrarMensaje();
+                    startActivity(new Intent(getApplicationContext(), AsignacionMedidor.class));
+                    finish();
                     //sendMail();
                 }
             }, new Response.ErrorListener() {
@@ -247,7 +249,7 @@ public class Registro_Cliente extends AppCompatActivity {
                     params.put("cedula", edtCedula.getText().toString());
                     params.put("nombre", edtnombre.getText().toString());
                     params.put("apellido", edtapellido.getText().toString());
-                    params.put("plantilla", String.valueOf(id_tipoDocumento));
+                    params.put("tipo_documento", String.valueOf(id_tipoDocumento));
                     params.put("codigo", edtcodigo.getText().toString());
                     params.put("fecha", edtFecha.getText().toString());
                     params.put("direccion", edtdireccion.getText().toString());
