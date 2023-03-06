@@ -27,6 +27,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.epapa_coli.AsigMedidor;
+import com.example.epapa_coli.ListaMedidor;
+import com.example.epapa_coli.Lista_medidores;
 import com.example.epapa_coli.Model.GetSetCliente;
 import com.example.epapa_coli.Model.GetSetPago;
 import com.example.epapa_coli.Model.GetSetTipoUsuario;
@@ -94,7 +96,8 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.ViewHold
             @Override
             public void onClick(View v) {
 
-                TextView txtnombres, txttipoDocumento, txttipoCategoria, txttipoUsuario, txtMedidor;
+                TextView txtnombres, txttipoDocumento, txttipoCategoria, txttipoUsuario ;
+                Button txtMedidor;
                 AutoCompleteTextView tipoUserModal;
                 Button btn;
 
@@ -106,8 +109,8 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.ViewHold
                 nombredocumento = pago.getNombre_documento();
                 tipoUsuario = pago.getTipoUsuario();
                 categoria = pago.getCategoria();
-                ubicacion = "La dirección del medidor está en "+pago.getUbicacion_asignacion()+"\nSus coordenadas son "+pago.getLatitud()+","+pago.getLongitud()+"" +
-                        "\nMarca del medidor "+pago.getMarca()+" con medidas de "+pago.getMedidas();
+                //ubicacion = "La dirección del medidor está en "+pago.getUbicacion_asignacion()+"\nSus coordenadas son "+pago.getLatitud()+","+pago.getLongitud()+"" +
+                       // "\nMarca del medidor "+pago.getMarca()+" con medidas de "+pago.getMedidas();
                 alertDialog.setView(alertCustomDialog);
 
                 txtnombres = alertCustomDialog.findViewById(R.id.nombreClienteDialog);
@@ -119,7 +122,17 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.ViewHold
                 txttipoUsuario = alertCustomDialog.findViewById(R.id.tipoUsuarioDialog);
                 txttipoUsuario.setText(tipoUsuario);
                 txtMedidor = alertCustomDialog.findViewById(R.id.ubicacionDialog);
-                txtMedidor.setText(ubicacion);
+                txtMedidor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle code = new Bundle();
+                        code.putString("id", String.valueOf(id_cliente));
+                        Intent i = new Intent(context, Lista_medidores.class);
+                        i.putExtras(code);
+                        context.startActivity(i);
+                    }
+                });
+                //txtMedidor.setText(ubicacion);
                 tipoUserModal = alertCustomDialog.findViewById(R.id.tipoUserModal);
                 String URL = "https://epapa-coli.es/tesis-epapacoli/tipoUsuario.php";
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {

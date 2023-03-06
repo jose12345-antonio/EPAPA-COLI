@@ -23,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EPAPACOLI">
         <activity
+            android:name=".Lista_medidores"
+            android:exported="false" />
+        <activity
             android:name=".AsigMedidor"
             android:exported="true" />
         <activity
@@ -30,7 +33,7 @@
             android:exported="true" />
         <activity
             android:name=".AsignacionMedidor"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".RegistroMedidor"
             android:exported="true" />

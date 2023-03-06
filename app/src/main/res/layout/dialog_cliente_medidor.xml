@@ -147,9 +147,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
                     <LinearLayout
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -157,25 +156,26 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ubicación del medidor"
+                            android:text="Medidores"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/purple_500" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="1">
-                        <TextView
+                        android:layout_weight="1"
+                        android:textAlignment="center">
+                        <Button
                             android:id="@+id/ubicacionDialog"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:justificationMode="inter_word"
-                            android:lineSpacingMultiplier="1.2"
                             android:textSize="14sp"
-                            android:textColor="@color/black" />
+                            android:textAlignment="center"
+                            android:text="Visualizar"
+                            android:textColor="@color/white" />
                     </LinearLayout>
                 </LinearLayout>
 
