@@ -38,7 +38,7 @@ public class AdapterListPago extends RecyclerView.Adapter<AdapterListPago.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final GetSetPago pago = data.get(position);
 
-        holder.txt_codigoPago.setText(pago.getCodigo_transaccion());
+        holder.txt_codigoPago.setText("Código de transacción: "+pago.getCodigo_transaccion());
         holder.txt_valorPago.setText("$ "+pago.getValorPago());
         holder.txt_fechaPago.setText(pago.getFecha_pago());
 

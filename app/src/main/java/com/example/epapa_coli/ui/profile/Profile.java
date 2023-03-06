@@ -43,7 +43,7 @@ public class Profile extends Fragment {
     LinearLayout lndatosPersonales, lnConfiguracionCuenta, lnPassword, lnInformacion, lnContacto, lnTerminosCondiciones;
     TextView txtNombres, txtFechaRegistro;
 
-    String user;
+    String user, rol, nombres;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +53,7 @@ public class Profile extends Fragment {
             variable(view);
         user =  Preferences.obtenerPreferenceString(getContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
         obtenerUsuario();
+
         return view;
     }
 
@@ -160,10 +161,15 @@ public class Profile extends Fragment {
 
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        txtNombres.setText("Hola, "+jsonObject1.getString("nombres"));
+                        nombres = jsonObject1.getString("nombres");
                         txtFechaRegistro.setText("Fecha de registro: "+jsonObject1.getString("created_at"));
+                        rol = jsonObject1.getString("rol");
                     }
-
+                        if(rol.equals("Administrador")){
+                            txtNombres.setText("Hola, "+nombres+"_admin");
+                        }else if(rol.equals("Usuario")){
+                            txtNombres.setText("Hola, "+nombres);
+                        }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -51,6 +51,11 @@ public class Registro_Cliente extends AppCompatActivity {
     int listar = 0;
     int listarCedula = 0;
     private String cedulaValidate;
+    int codigo;
+    private static final int num_provincias = 24;
+    //public static String rucPrueba = “1790011674001″;
+    private static int[] coeficientes = {4, 3, 2, 7, 6, 5, 4, 3, 2};
+    private static int constante = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,7 @@ public class Registro_Cliente extends AppCompatActivity {
         edtcodigo = findViewById(R.id.codigoClientes);
         edtCedula = findViewById(R.id.cedulaClientes);
         registerClientes = findViewById(R.id.btnClienteRegister);
+        obtenerCodigo();
         registerClientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,22 +267,42 @@ public class Registro_Cliente extends AppCompatActivity {
         cantidad = cedula.length();
         if (edtCedula.getText().toString().equals("")){
             edtCedula.setError("El campo no puede estar vacío");
-        } else if(cantidad <= 9){
-            edtCedula.setError("La cédula es de 10 dígitos");
-        } else if (isEcuadorianDocumentValid() == false) {
-            edtCedula.setError("Cédula ingresada es incorrecta");
+            Toast.makeText(getApplicationContext(), "El campo cédula está vacío", Toast.LENGTH_SHORT).show();
+        } else if(id_tipoDocumento==1){
+            if (!validacionRUC(edtCedula.getText().toString())) {
+                edtCedula.setError("RUC ingresado es incorrecto");
+                Toast.makeText(getApplicationContext(), "El RUC que ingresó es incorrecto", Toast.LENGTH_SHORT).show();
+                System.out.println("RUC FALLO");
+            }else if(cantidad<=12){
+                Toast.makeText(getApplicationContext(), "El campo debe mantener 13 dígitos", Toast.LENGTH_SHORT).show();
+            }
+        } else if(id_tipoDocumento==2){
+            if (isEcuadorianDocumentValid() == false) {
+                edtCedula.setError("Cédula ingresada es incorrecta");
+                Toast.makeText(getApplicationContext(), "La cédula ingresada es incorrecta", Toast.LENGTH_SHORT).show();
+                System.out.println("CEDULA FALLO");
+            }else if(cantidad <= 9){
+                edtCedula.setError("La cédula es de 10 dígitos");
+                Toast.makeText(getApplicationContext(), "El campo cédula debe mantener 10 dígitos", Toast.LENGTH_SHORT).show();
+            }
         }else if(listarCedula>=1){
             edtCedula.setError("La cédula se encuentra registrada");
+            Toast.makeText(getApplicationContext(), "La cédula ya se encuentra registrada", Toast.LENGTH_SHORT).show();
         }else if(edtnombre.getText().toString().equals("")) {
             edtnombre.setError("El campo no puede estar vacío");
+            Toast.makeText(getApplicationContext(), "El campo nombre está vacío", Toast.LENGTH_SHORT).show();
         }else if(edtapellido.getText().toString().equals("")) {
             edtapellido.setError("El campo no puede estar vacío");
+            Toast.makeText(getApplicationContext(), "El campo cédula apellido vacío", Toast.LENGTH_SHORT).show();
         }else if(edtcodigo.getText().toString().equals("")) {
             edtcodigo.setError("El campo no puede estar vacío");
+            Toast.makeText(getApplicationContext(), "El campo código único está vacío", Toast.LENGTH_SHORT).show();
         }else if(edtdireccion.getText().toString().equals("")) {
             edtdireccion.setError("El campo no puede estar vacío");
+            Toast.makeText(getApplicationContext(), "El campo cédula dirección vacío", Toast.LENGTH_SHORT).show();
         }else if(edtFecha.getText().toString().equals("")){
             edtFecha.setError("El campo no puede estar vacío");
+            Toast.makeText(getApplicationContext(), "El campo fecha de nacimiento está vacío", Toast.LENGTH_SHORT).show();
         }else {
             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -415,6 +441,84 @@ public class Registro_Cliente extends AppCompatActivity {
         dialogo1.show();
     }
 
+    public void obtenerCodigo(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/obtener_codigoUnico.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    JSONArray jsonArray = jsonObject.getJSONArray("codigo");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        codigo = jsonObject1.getInt("codigo");
+                    }
+                    int sum = codigo+1;
+                    edtcodigo.setText("000"+sum);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                requestQueue.getCache().clear();
+            }
+        });
+    }
 
 
-}
+        public static Boolean validacionRUC(String ruc) {
+//verifica que los dos primeros dígitos correspondan a un valor entre 1 y NUMERO_DE_PROVINCIAS
+            int prov = Integer.parseInt(ruc.substring(0, 2));
+
+            if (!((prov > 0) && (prov <= num_provincias))) {
+                System.out.println("Error:ruc ingresada mal");
+                return false;
+            }
+
+//verifica que el último dígito de la cédula sea válido
+            int[] d = new int[10];
+            int suma = 0;
+
+//Asignamos el string a un array
+            for (int i = 0; i < d.length; i++) {
+                d[i] = Integer.parseInt(ruc.charAt(i) + "");
+            }
+
+            for (int i = 0; i < d.length - 1;
+            i++){
+                d[i] = d[i] * coeficientes[i];
+                suma += d[i];
+//System.out.println(“Vector d en ” + i + ” es ” + d[i]);
+            }
+
+            System.out.println("Suma es: "+suma);
+
+            int aux, resp;
+
+            aux = suma % constante;
+            resp = constante - aux;
+
+            resp = (resp == 10) ? 0 : resp;
+
+            System.out.println("Aux: "+aux);
+            System.out.println("Resp " + resp);
+            System.out.println("d[9] " + d[9]);
+
+            if (resp == d[9]) {
+                return true;
+            } else
+                return false;
+        }
+    }

@@ -50,32 +50,8 @@
                         android:drawableLeft="@drawable/ic_baseline_date_range_24"
                         android:inputType="date"></com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
-
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Fecha Fin"
-                    android:layout_margin="10dp"
-                    app:endIconMode="clear_text">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtFechaFin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:clickable="true"
-                        android:drawableLeft="@drawable/ic_baseline_date_range_24"
-                        android:inputType="date"></com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
         </LinearLayout>
         <Button
             android:id="@+id/btnBuscar"
@@ -89,11 +65,30 @@
             android:drawableLeft="@drawable/ic_baseline_manage_search_24"
             android:padding="12sp"/>
 
+        <TextView
+            android:id="@+id/textTotal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPago"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"></androidx.recyclerview.widget.RecyclerView>
-
+        <TextView
+            android:id="@+id/contaor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:text="NO MANTIENE PAGO PARA LA FECHA SELECCIONADA"/>
     </LinearLayout>
 </FrameLayout>

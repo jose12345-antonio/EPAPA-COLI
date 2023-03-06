@@ -116,7 +116,7 @@
                         android:layout_marginTop="20dp"
                         android:hint="Contraseña"
                         android:padding="10dp"
-                        app:endIconMode="clear_text"
+                        app:passwordToggleEnabled="true"
                         app:helperText="requerido*">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -134,7 +134,7 @@
                         android:layout_marginTop="20dp"
                         android:hint="Repetir Contraseña"
                         android:padding="10dp"
-                        app:endIconMode="clear_text"
+                        app:passwordToggleEnabled="true"
                         app:helperText="requerido*">
 
                         <com.google.android.material.textfield.TextInputEditText

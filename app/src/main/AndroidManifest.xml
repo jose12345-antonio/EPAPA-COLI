@@ -6,6 +6,14 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +23,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EPAPACOLI">
         <activity
-            android:name=".AsignacionMedidor"
+            android:name=".AsigMedidor"
             android:exported="true" />
+        <activity
+            android:name=".Localizacion"
+            android:exported="true" />
+        <activity
+            android:name=".AsignacionMedidor"
+            android:exported="true"></activity>
         <activity
             android:name=".RegistroMedidor"
             android:exported="true" />
@@ -93,6 +107,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyC1Bdt_EFbnG7rmAWxFsepFMhFI-zA6MK0" />
     </application>
 
 </manifest>

@@ -3,9 +3,9 @@ package com.example.epapa_coli.Model;
 public class GetSetCliente {
 
     int id_cedula, id_tipoUsuario, id_asignacion;
-    String numero_cedula, nombres, apellidos, direccion, fecha_nacimiento, tipoUsuario, nombre_documento, codigo_unico, ubicacion_asignacion, latitud, longitud, codigo_medidor, marca, tipo_material, medidas, diametro;
+    String numero_cedula, nombres, apellidos, direccion, fecha_nacimiento, tipoUsuario, nombre_documento, codigo_unico, ubicacion_asignacion, latitud, longitud, codigo_medidor, marca, tipo_material, medidas, diametro, categoria;
 
-    public GetSetCliente(int id_cedula, String numero_cedula, String nombres, String apellidos, String direccion, String fecha_nacimiento, String tipoUsuario, int id_tipoUsuario, String nombre_documento, String codigo_unico, int id_asignacion, String ubicacion_asignacion, String latitud, String longitud, String codigo_medidor, String marca, String tipo_material, String medidas, String diametro) {
+    public GetSetCliente(int id_cedula, String numero_cedula, String nombres, String apellidos, String direccion, String fecha_nacimiento, String tipoUsuario, int id_tipoUsuario, String nombre_documento, String codigo_unico, int id_asignacion, String ubicacion_asignacion, String latitud, String longitud, String codigo_medidor, String marca, String tipo_material, String medidas, String diametro, String categoria) {
         this.id_cedula = id_cedula;
         this.numero_cedula = numero_cedula;
         this.nombres = nombres;
@@ -25,6 +25,15 @@ public class GetSetCliente {
         this.tipo_material = tipo_material;
         this.medidas = medidas;
         this.diametro = diametro;
+        this.categoria = categoria;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getNombre_documento() {

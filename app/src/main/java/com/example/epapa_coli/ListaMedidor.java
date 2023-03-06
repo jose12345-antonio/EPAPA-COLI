@@ -105,7 +105,8 @@ public class ListaMedidor extends AppCompatActivity {
 
                                 playerlist1.add(new GetSetMedidor(id, codigo_medidor, fecha_registro, marca, tipo_material, medidas, diametro, nombre_estado));
                             }
-                            adaptador = new AdapterMedidor(playerlist1, getApplicationContext());
+
+                            adaptador = new AdapterMedidor(playerlist1, ListaMedidor.this);
                             recyclerView.setAdapter(adaptador);
 
                         } catch (JSONException e) {

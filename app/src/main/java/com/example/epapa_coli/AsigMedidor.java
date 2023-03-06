@@ -33,9 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.epapa_coli.Model.GetSetDocumento;
 import com.example.epapa_coli.Model.GetSetMedidor;
-import com.google.android.material.badge.BadgeUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +46,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class AsignacionMedidor extends AppCompatActivity {
+public class AsigMedidor extends AppCompatActivity {
 
     AutoCompleteTextView medidorList;
     EditText edtubicacion, edtlatitud, edtlongitud;
@@ -61,10 +59,10 @@ public class AsignacionMedidor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_asignacion_medidor);
+        setContentView(R.layout.activity_asig_medidor);
 
         llenarspinnerMedidor();
-        obtenerCliente();
+        id_cliente = Integer.parseInt(getIntent().getStringExtra("id"));
         medidorList = findViewById(R.id.medidorList);
         edtubicacion = findViewById(R.id.ubicacionAsignacion);
         edtlatitud = findViewById(R.id.latitudAsignacion);
@@ -85,40 +83,6 @@ public class AsignacionMedidor extends AppCompatActivity {
         });
     }
 
-    public void obtenerCliente(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/obtenerCliente.php", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-
-                    JSONArray jsonArray = jsonObject.getJSONArray("cliente");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        id_cliente = jsonObject1.getInt("id");
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
-            @Override
-            public void onRequestFinished(Request<Object> request) {
-                requestQueue.getCache().clear();
-            }
-        });
-    }
     public void llenarspinnerMedidor() {
         String URL = "https://epapa-coli.es/tesis-epapacoli/listar_medidor.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -218,15 +182,14 @@ public class AsignacionMedidor extends AppCompatActivity {
     }
     public void ObtenerCoordenadas(View view) {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(AsignacionMedidor.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            ActivityCompat.requestPermissions(AsigMedidor.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         } else {
             locationStart();
         }
     }
-
     private void locationStart() {
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Localizacion Local = new Localizacion();
+        AsigMedidor.Localizacion Local = new AsigMedidor.Localizacion();
         Local.setMainActivity(this);
         final boolean gpsEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!gpsEnabled) {
@@ -242,7 +205,6 @@ public class AsignacionMedidor extends AppCompatActivity {
         //latitud.setText("Localización agregada");
         edtubicacion.setText("");
     }
-
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1000) {
@@ -270,13 +232,13 @@ public class AsignacionMedidor extends AppCompatActivity {
     }
     /* Aqui empieza la Clase Localizacion */
     public class Localizacion implements LocationListener {
-        AsignacionMedidor mainActivity;
+        AsigMedidor mainActivity;
 
-        public AsignacionMedidor getMainActivity() {
+        public AsigMedidor getMainActivity() {
             return mainActivity;
         }
 
-        public void setMainActivity(AsignacionMedidor mainActivity) {
+        public void setMainActivity(AsigMedidor mainActivity) {
             this.mainActivity = mainActivity;
         }
 
@@ -321,4 +283,5 @@ public class AsignacionMedidor extends AppCompatActivity {
             }
         }
     }
+
 }

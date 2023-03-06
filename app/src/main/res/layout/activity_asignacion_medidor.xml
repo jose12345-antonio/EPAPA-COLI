@@ -50,6 +50,31 @@
                 android:hint="Medidor"
                 android:inputType="none"></AutoCompleteTextView>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click para obtener la ubicación real"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textColor="@color/purple_500"
+                android:textSize="16sp"/>
+            <ImageView
+                android:id="@+id/ubicacion"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_baseline_location_on_24"
+                android:tint="@color/purple_500"/>
+        </LinearLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -64,6 +89,7 @@
                 android:id="@+id/ubicacionAsignacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:drawableLeft="@drawable/ic_baseline_credit_card_24"
                 android:inputType="text"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
@@ -81,6 +107,7 @@
                 android:id="@+id/latitudAsignacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:drawableLeft="@drawable/ic_baseline_credit_card_24"
                 android:inputType="text"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
@@ -98,6 +125,7 @@
                 android:id="@+id/longitudAsignacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:drawableLeft="@drawable/ic_baseline_credit_card_24"
                 android:inputType="text"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>

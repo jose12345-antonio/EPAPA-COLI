@@ -76,7 +76,7 @@ public class VerifySession extends AppCompatActivity {
     KeyGenerator keyGenerator;
     int codeCantidad, codeHuella;
     String user;
-    LinearLayout lytllamanos;
+    LinearLayout lytllamanos, lytubicanos;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("WrongConstant")
@@ -95,6 +95,13 @@ public class VerifySession extends AppCompatActivity {
                 if(ActivityCompat.checkSelfPermission(VerifySession.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
                     return;
                 startActivity(intent);
+            }
+        });
+        lytubicanos = findViewById(R.id.lytubicanos);
+        lytubicanos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Localizacion.class));
             }
         });
 
@@ -337,7 +344,7 @@ public class VerifySession extends AppCompatActivity {
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
-                UpdateHuella("https://devtesis.com/tesis-epapacoli/update_huella.php?correo="+user);
+                UpdateHuella("https://epapa-coli.es/tesis-epapacoli/update_huella.php?correo="+user);
                 startActivity(new Intent(getApplicationContext(), VerifySession.class));
             }
         });

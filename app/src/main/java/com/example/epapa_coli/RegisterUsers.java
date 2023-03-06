@@ -29,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.epapa_coli.Model.GetSetTipoUsuario;
 import com.example.epapa_coli.Received.ReceivedRegisterUsers;
+import com.example.epapa_coli.Received.ReceivedResetPassword;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +43,7 @@ import java.util.Map;
 public class RegisterUsers extends AppCompatActivity {
 
     EditText edtCorreo, edtCelular, edtPassword, edtRepeatPassword;
-    String id_cedula, nombres, apellidos;
+    String id_cedula, nombres, apellidos, correo;
     int contadorCorreo;
     Button btnNext;
     LinearLayout regresarlog;
@@ -60,6 +61,8 @@ public class RegisterUsers extends AppCompatActivity {
         apellidos = getIntent().getStringExtra("apellidos");
 
         edtCorreo = findViewById(R.id.edtCorreoRegister);
+
+
         edtCelular = findViewById(R.id.celularRegister);
         edtPassword = findViewById(R.id.newPasswordRegister);
         edtRepeatPassword = findViewById(R.id.repetPasswordRegister);
@@ -146,6 +149,7 @@ public class RegisterUsers extends AppCompatActivity {
     public void RegistrarUsuario(String URL){
 
         estado_huella = (chhuella.isChecked() ? 1 : 0);
+        correo = edtCorreo.getText().toString();
 
         if (edtCorreo.getText().toString().equals("")){
             edtCorreo.setError("El campo está vacío");
@@ -167,7 +171,7 @@ public class RegisterUsers extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     Toast.makeText(getApplicationContext(), "Se registro correctamente", Toast.LENGTH_SHORT).show();
-                    //sendMail();
+                    sendMail(correo);
                     Bundle code = new Bundle();
                     code.putString("correo", edtCorreo.getText().toString());
                     Intent i = new Intent(RegisterUsers.this, RegisterCode.class);
@@ -204,17 +208,18 @@ public class RegisterUsers extends AppCompatActivity {
         }
     }
 
-    private void sendMail() {
+
+    private void sendMail(String correo) {
         String nombre = nombres;
         String apellido = apellidos;
-        String subject = "DISTRIBUIDORA LA BODEGA";
+        String subject = "EPAPA-COLI";
         String message = nombre+" "+apellido;
-        String frase = "REGISTRO DE USUARIO.";
-        String mensaje = frase+"\n\nEl usuario "+message+" se registró con éxito";
+        String frase = "REGISTRO DE CREDENCIALES.";
+        String mensaje = frase+"\n\nEl usuario "+message+" se registró con éxito.\n Ingrese al siguiente link para activar su cuenta. \n " +
+                "https://epapa-coli.es/tesis-epapacoli/updateestado.php?correo="+correo;
 
-        ReceivedRegisterUsers javaMailAPI = new ReceivedRegisterUsers(getApplicationContext(), edtCorreo.getText().toString(), subject, mensaje);
+        ReceivedResetPassword javaMailAPI = new ReceivedResetPassword(RegisterUsers.this, correo, subject, mensaje);
         javaMailAPI.execute();
     }
-
 
 }

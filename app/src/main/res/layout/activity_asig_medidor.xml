@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistroMedidor">
+    tools:context=".AsigMedidor">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,13 +21,13 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_brightness_medium_24"
+                android:src="@drawable/ic_baseline_person_add_24"
                 android:layout_gravity="center"
-                app:tint="@color/purple_500" />
+                android:tint="@color/purple_500"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REGISTRO DE MEDIDOR"
+                android:text="ASIGNACIÓN MEDIDOR"
                 android:textColor="@color/purple_500"
                 android:layout_marginLeft="6dp"
                 android:textStyle="bold"
@@ -39,118 +37,100 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Código medidor"
             android:padding="10dp"
-            app:helperText="requerido*"
-            app:endIconMode="clear_text">
+            app:helperText="requerido*">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/codigoMedidor"
+            <AutoCompleteTextView
+                android:id="@+id/medidorList2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="10"
-                android:drawableLeft="@drawable/ic_baseline_code_24"
-                android:inputType="number"></com.google.android.material.textfield.TextInputEditText>
+                android:hint="Medidor"
+                android:inputType="none"></AutoCompleteTextView>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click para obtener la ubicación real"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textColor="@color/purple_500"
+                android:textSize="16sp"/>
+            <ImageView
+                android:id="@+id/ubicacion2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_baseline_location_on_24"
+                android:tint="@color/purple_500"/>
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Marca"
+            android:hint="Ubicación"
             android:padding="10dp"
             app:helperText="requerido*"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/marcaMedidor2"
+                android:id="@+id/ubicacionAsignacion2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:drawableLeft="@drawable/ic_baseline_credit_card_24"
                 android:inputType="text"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Tipo de material"
+            android:hint="Latitud"
             android:padding="10dp"
             app:helperText="requerido*"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tipoMaterialMedidor"
+                android:id="@+id/latitudAsignacion2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:drawableLeft="@drawable/ic_baseline_credit_card_24"
                 android:inputType="text"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Medidas medidor"
+            android:hint="Longitud"
             android:padding="10dp"
             app:helperText="requerido*"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/medidasMedidor"
+                android:id="@+id/longitudAsignacion2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:drawableLeft="@drawable/ic_baseline_credit_card_24"
                 android:inputType="text"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Diametro medidor"
-            android:padding="10dp"
-            app:helperText="requerido*"
-            app:endIconMode="clear_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/diametroMedidor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_baseline_credit_card_24"
-                android:inputType="text"></com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Fecha registro"
-                android:padding="10dp"
-                app:helperText="requerido*"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fechaR"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_date_range_24"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:inputType="date"></com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-
         <Button
-            android:id="@+id/btnMedidor"
+            android:id="@+id/btnAsignacion2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -159,13 +139,12 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/button_bg"
             android:padding="10dp"
-            android:drawableLeft="@drawable/ic_baseline_opacity_24"
-            android:text="REGISTRAR MEDIDOR"
+            android:drawableLeft="@drawable/ic_baseline_person_add_24"
+            android:text="ASIGNAR MEDIDOR A CLIENTE"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"></Button>
 
-
     </LinearLayout>
-    </ScrollView>
+
 </RelativeLayout>

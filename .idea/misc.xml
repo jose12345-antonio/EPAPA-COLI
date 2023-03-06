@@ -9,6 +9,7 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/oval.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/toast_drawable.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/toast_vonfirm.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_asig_medidor.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_asignacion_medidor.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_card_pago.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_confirm_update_password.xml" value="0.1" />
@@ -16,6 +17,7 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_home_admin.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_home_user.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_lista_medidor.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_localizacion.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_login.xml" value="0.2545454545454545" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_pin_code_verify.xml" value="0.17969661610268378" />
@@ -33,7 +35,10 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_verify_code.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_verify_session.xml" value="0.240625" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_view_user.xml" value="0.25" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/dialog_clienteMedidor.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/dialog_cliente_medidor.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/dialog_contacto.xml" value="0.1" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/dialog_estado_medidor.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/dialog_informacion.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/dialog_termino.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/fragment_clientes.xml" value="0.1" />

@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
     Button btnIniciarSesion;
     TextView txtReset, txtRegistrar;
     CheckBox session;
+    int estado;
     private boolean isActivateRadioButton;
     private AsyncHttpClient usuario_clien;
     @Override
@@ -121,33 +122,38 @@ public class Login extends AppCompatActivity {
                                         user.setPassword(jsonObj.getString("contrasena"));
                                         user.setRol(jsonObj.getInt("id_rol"));
                                         user.setNombre_rol(jsonObj.getString("id_rol"));
-                                        Intent i = null;
-                                        toastVerify();
-                                        switch (user.getRol()) {
-                                            case 1:
-                                                user.setNombre_rol("Administrador");
-                                                Preferences.guardarPreferenceBoolean(Login.this,session.isChecked(),Preferences.PREFERENCE_ESTADO_BUTTON_SESION);
-                                                Preferences.guardarPreferenceString(Login.this,edtCorreo.getText().toString(),Preferences.PREFERENCE_USUARIO_LOGIN);
-                                                Preferences.guardarPreferenceStringRol(Login.this,"administrador",Preferences.PREFERENCE_ROL_LOGIN);
-                                                //if(Preferences.obtenerPreferenceBoolean(MainActivity.this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
-                                                startActivity(new Intent(Login.this, HomeAdmin.class));
-                                                Login.super.onBackPressed();
-                                                //}
-                                                break;
-                                            case 2:
-                                                user.setNombre_rol(("Usuario"));
-                                                Preferences.guardarPreferenceBoolean(Login.this,session.isChecked(),Preferences.PREFERENCE_ESTADO_BUTTON_SESION);
-                                                Preferences.guardarPreferenceString(Login.this,edtCorreo.getText().toString(),Preferences.PREFERENCE_USUARIO_LOGIN);
-                                                Preferences.guardarPreferenceStringRol(Login.this,"usuario",Preferences.PREFERENCE_ROL_LOGIN);
-                                                //if(Preferences.obtenerPreferenceBoolean(MainActivity.this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
-                                                startActivity(new Intent(Login.this, HomeUser.class));
-                                                Login.super.onBackPressed();
-                                                // }
-                                                break;
+                                        estado = jsonObj.getInt("estado");
+                                        if(estado!=0) {
+                                            Intent i = null;
+                                            toastVerify();
+                                            switch (user.getRol()) {
+                                                case 1:
+                                                    user.setNombre_rol("Administrador");
+                                                    Preferences.guardarPreferenceBoolean(Login.this, session.isChecked(), Preferences.PREFERENCE_ESTADO_BUTTON_SESION);
+                                                    Preferences.guardarPreferenceString(Login.this, edtCorreo.getText().toString(), Preferences.PREFERENCE_USUARIO_LOGIN);
+                                                    Preferences.guardarPreferenceStringRol(Login.this, "administrador", Preferences.PREFERENCE_ROL_LOGIN);
+                                                    //if(Preferences.obtenerPreferenceBoolean(MainActivity.this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
+                                                    startActivity(new Intent(Login.this, HomeAdmin.class));
+                                                    Login.super.onBackPressed();
+                                                    //}
+                                                    break;
+                                                case 2:
+                                                    user.setNombre_rol(("Usuario"));
+                                                    Preferences.guardarPreferenceBoolean(Login.this, session.isChecked(), Preferences.PREFERENCE_ESTADO_BUTTON_SESION);
+                                                    Preferences.guardarPreferenceString(Login.this, edtCorreo.getText().toString(), Preferences.PREFERENCE_USUARIO_LOGIN);
+                                                    Preferences.guardarPreferenceStringRol(Login.this, "usuario", Preferences.PREFERENCE_ROL_LOGIN);
+                                                    //if(Preferences.obtenerPreferenceBoolean(MainActivity.this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)) {
+                                                    startActivity(new Intent(Login.this, HomeUser.class));
+                                                    Login.super.onBackPressed();
+                                                    // }
+                                                    break;
 
-                                            default:
-                                                Toast.makeText(getApplicationContext(),"PROBLEMA CON EL ROL",Toast.LENGTH_SHORT).show();
-                                                break;
+                                                default:
+                                                    Toast.makeText(getApplicationContext(), "PROBLEMA CON EL ROL", Toast.LENGTH_SHORT).show();
+                                                    break;
+                                            }
+                                        }else{
+                                            Toast.makeText(getApplicationContext(), "El usuario no se encuentra activo", Toast.LENGTH_LONG).show();
                                         }
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -173,10 +179,8 @@ public class Login extends AppCompatActivity {
 
     public void toastError() {
         Toast toast = new Toast(this);
-
         View toast_layout = getLayoutInflater().inflate(R.layout.toast_error, (ViewGroup) findViewById(R.id.lytLayout));
         toast.setView(toast_layout);
-
         TextView textView = (TextView) toast_layout.findViewById(R.id.toastMessage);
         textView.setText("Correo y/o contraseña incorrecta");
         toast.setDuration(Toast.LENGTH_SHORT);

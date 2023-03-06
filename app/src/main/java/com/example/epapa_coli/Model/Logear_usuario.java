@@ -12,13 +12,14 @@ public class Logear_usuario {
     private String correo;
     private String password;
     private int rol;
+    private int estado;
     private String nombre_rol;
 
     public Logear_usuario() {
 
     }
 
-    public Logear_usuario(int id, String nombres, String apellidos, String nombre_usuario, String correo, String password, int rol, String nombre_rol) {
+    public Logear_usuario(int id, String nombres, String apellidos, String nombre_usuario, String correo, String password, int rol, String nombre_rol, int estado) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -27,8 +28,18 @@ public class Logear_usuario {
         this.password = password;
         this.rol = rol;
         this.nombre_rol = nombre_rol;
+        this.estado = estado;
     }
-//Getter
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    //Getter
     public int getId() {
         return id;
     }

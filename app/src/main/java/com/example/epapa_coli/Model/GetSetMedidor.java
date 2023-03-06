@@ -86,4 +86,6 @@ public class GetSetMedidor {
     public String toString() {
         return codigo_medidor+"-"+marca ;
     }
+
+
 }

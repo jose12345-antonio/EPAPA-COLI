@@ -2,12 +2,16 @@ package com.example.epapa_coli;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,18 +29,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Registro_Lectura extends AppCompatActivity {
 
-    EditText edtlecturaactual, edtconsumo, edtpotable, edtalcantarillado, edtTotal;
+    EditText edtlecturaactual, edtconsumo, edtpotable, edtalcantarillado, edtTotal, lecturaanteriorRe, fechaRe;
     String id_cliente, id_tipoUsuario;
-    int lecturaAnt, total;
-    int estadoActual;
+    int total;
+    int estadoActual,lecturaAnt;
     double desc, totalDesc, totalPagar,potable, alcantarillado;
     Button btnLecturaRegister;
     TextView txtMen;
+    DatePickerDialog.OnDateSetListener onDateSetListener;
+    String fecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,9 @@ public class Registro_Lectura extends AppCompatActivity {
         edtpotable = findViewById(R.id.aguapotable);
         edtTotal = findViewById(R.id.edtTotal);
         edtalcantarillado = findViewById(R.id.alcantarilladoRe);
-
+        fechaRe = findViewById(R.id.fechaRe);
+        lecturaanteriorRe = findViewById(R.id.lecturaanteriorRe);
+        Fecha();
         edtlecturaactual.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,18 +102,18 @@ public class Registro_Lectura extends AppCompatActivity {
                         edtconsumo.setText("" + total);
                         edtpotable.setText("" + obtieneDosDecimales(potable));
                         edtalcantarillado.setText("" + obtieneDosDecimales(alcantarillado));
-                        edtTotal.setText("$" + String.valueOf(totalPagar));
+                        edtTotal.setText("$ " + String.valueOf(obtieneDosDecimales(totalPagar)));
                     } else {
                         edtconsumo.setText("");
                         edtpotable.setText("");
                         edtalcantarillado.setText("");
-                        edtTotal.setText("$0");
+                        edtTotal.setText("$ 0");
                     }
                 }else{
                     edtconsumo.setText("");
                     edtpotable.setText("");
                     edtalcantarillado.setText("");
-                    edtTotal.setText("$0");
+                    edtTotal.setText("$ 0");
                 }
             }
         });
@@ -117,6 +126,32 @@ public class Registro_Lectura extends AppCompatActivity {
             }
         });
 
+    }
+    private void Fecha(){
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        fechaRe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Registro_Lectura.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        onDateSetListener, year, month, day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() + 1000);
+                datePickerDialog.show();
+            }
+        });
+        onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                i1 = i1 + 1;
+                fecha = i + "-" + i1 + "-" + i2;
+                fechaRe.setText(fecha);
+            }
+        };
     }
 
     private String obtieneDosDecimales(double valor){
@@ -136,7 +171,13 @@ public class Registro_Lectura extends AppCompatActivity {
                         for(int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             lecturaAnt = jsonObject1.getInt("valor");
-
+                        }
+                        if(lecturaAnt != 0){
+                            lecturaanteriorRe.setText(""+lecturaAnt);
+                            lecturaanteriorRe.setEnabled(false);
+                        }else{
+                            lecturaanteriorRe.setText("0");
+                            lecturaanteriorRe.setEnabled(true);
                         }
 
 
@@ -177,6 +218,7 @@ public class Registro_Lectura extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     Toast.makeText(getApplicationContext(), "Se registró exitosamente la lectura", Toast.LENGTH_SHORT).show();
+                    finish();
                     //sendMail();
                 }
             }, new Response.ErrorListener() {
@@ -195,6 +237,7 @@ public class Registro_Lectura extends AppCompatActivity {
                     params.put("alcantarillado", edtalcantarillado.getText().toString());
                     params.put("id", id_cliente);
                     params.put("pagar", String.valueOf(totalPagar));
+                    params.put("fecha", fechaRe.getText().toString());
                     System.out.println(params);
                     return params;
 
