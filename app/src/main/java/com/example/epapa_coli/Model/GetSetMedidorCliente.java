@@ -2,9 +2,9 @@ package com.example.epapa_coli.Model;
 
 public class GetSetMedidorCliente {
     int id_asignacion;
-    String ubicacion, latitud, longitud, codigo_medidor, marca, tipo_material, medidas, diametro;
+    String ubicacion, latitud, longitud, codigo_medidor, marca, tipo_material;
 
-    public GetSetMedidorCliente(int id_asignacion, String ubicacion, String latitud, String longitud, String codigo_medidor, String marca, String tipo_material, String medidas, String diametro) {
+    public GetSetMedidorCliente(int id_asignacion, String ubicacion, String latitud, String longitud, String codigo_medidor, String marca, String tipo_material) {
         this.id_asignacion = id_asignacion;
         this.ubicacion = ubicacion;
         this.latitud = latitud;
@@ -12,8 +12,7 @@ public class GetSetMedidorCliente {
         this.codigo_medidor = codigo_medidor;
         this.marca = marca;
         this.tipo_material = tipo_material;
-        this.medidas = medidas;
-        this.diametro = diametro;
+
     }
 
     public GetSetMedidorCliente() {
@@ -75,21 +74,6 @@ public class GetSetMedidorCliente {
         this.tipo_material = tipo_material;
     }
 
-    public String getMedidas() {
-        return medidas;
-    }
-
-    public void setMedidas(String medidas) {
-        this.medidas = medidas;
-    }
-
-    public String getDiametro() {
-        return diametro;
-    }
-
-    public void setDiametro(String diametro) {
-        this.diametro = diametro;
-    }
 
     @Override
     public String toString() {

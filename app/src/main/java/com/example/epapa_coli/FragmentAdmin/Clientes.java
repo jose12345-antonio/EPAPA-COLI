@@ -117,11 +117,9 @@ public class Clientes extends Fragment {
                                 String codigo_medidor = jsonObject1.getString("codigo_medidor");
                                 String marca = jsonObject1.getString("marca");
                                 String tipo_material = jsonObject1.getString("tipo_material");
-                                String medidas = jsonObject1.getString("medidas");
-                                String diametro = jsonObject1.getString("diametro");
                                 String categoria = jsonObject1.getString("categoria");
 
-                                playerlist1.add(new GetSetCliente(id, numero_cedula, nombres, apellidos, direccion, fecha, tipousuario, id_tipoUsuario, nobre_documento, codigo_unico, id_asignacion, ubicacion_asignacion, longitud, latitud, codigo_medidor, marca, tipo_material, medidas, diametro, categoria));
+                                playerlist1.add(new GetSetCliente(id, numero_cedula, nombres, apellidos, direccion, fecha, tipousuario, id_tipoUsuario, nobre_documento, codigo_unico, id_asignacion, ubicacion_asignacion, longitud, latitud, codigo_medidor, marca, tipo_material, categoria));
                             }
                                  adaptador = new AdapterCliente(playerlist1, getContext());
                             recyclerView.setAdapter(adaptador);

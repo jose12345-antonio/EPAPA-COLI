@@ -23,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EPAPACOLI">
         <activity
+            android:name=".ListaMedidor2"
+            android:exported="true" />
+        <activity
             android:name=".Lista_medidores"
             android:exported="false" />
         <activity

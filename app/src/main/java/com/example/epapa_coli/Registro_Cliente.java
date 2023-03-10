@@ -265,29 +265,8 @@ public class Registro_Cliente extends AppCompatActivity {
         String cedula = edtCedula.getText().toString();
         int cantidad = 0;
         cantidad = cedula.length();
-        if (edtCedula.getText().toString().equals("")){
-            edtCedula.setError("El campo no puede estar vacío");
-            Toast.makeText(getApplicationContext(), "El campo cédula está vacío", Toast.LENGTH_SHORT).show();
-        } else if(id_tipoDocumento==1){
-            if (!validacionRUC(edtCedula.getText().toString())) {
-                edtCedula.setError("RUC ingresado es incorrecto");
-                Toast.makeText(getApplicationContext(), "El RUC que ingresó es incorrecto", Toast.LENGTH_SHORT).show();
-                System.out.println("RUC FALLO");
-            }else if(cantidad<=12){
-                Toast.makeText(getApplicationContext(), "El campo debe mantener 13 dígitos", Toast.LENGTH_SHORT).show();
-            }
-        } else if(id_tipoDocumento==2){
-            if (isEcuadorianDocumentValid() == false) {
-                edtCedula.setError("Cédula ingresada es incorrecta");
-                Toast.makeText(getApplicationContext(), "La cédula ingresada es incorrecta", Toast.LENGTH_SHORT).show();
-                System.out.println("CEDULA FALLO");
-            }else if(cantidad <= 9){
-                edtCedula.setError("La cédula es de 10 dígitos");
-                Toast.makeText(getApplicationContext(), "El campo cédula debe mantener 10 dígitos", Toast.LENGTH_SHORT).show();
-            }
-        }else if(listarCedula>=1){
-            edtCedula.setError("La cédula se encuentra registrada");
-            Toast.makeText(getApplicationContext(), "La cédula ya se encuentra registrada", Toast.LENGTH_SHORT).show();
+        if(edtCedula.getText().toString().equals("")){
+
         }else if(edtnombre.getText().toString().equals("")) {
             edtnombre.setError("El campo no puede estar vacío");
             Toast.makeText(getApplicationContext(), "El campo nombre está vacío", Toast.LENGTH_SHORT).show();
@@ -381,7 +360,6 @@ public class Registro_Cliente extends AppCompatActivity {
         });
     }
     private boolean isEcuadorianDocumentValid() {
-
         cedulaValidate = edtCedula.getText().toString();
         int suma = 0;
         int a[] = new int[cedulaValidate.length() / 2];

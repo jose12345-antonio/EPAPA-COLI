@@ -83,9 +83,13 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.ViewHold
                 id_cliente = pago.getId_cedula();
                 id_asignacion = pago.getId_asignacion();
                 id_tipoUsuario = pago.getId_tipoUsuario();
+                String nombre2 = pago.getNombres()+" "+pago.getApellidos();
+                String cedula2 = pago.getNumero_cedula();
                 Bundle code = new Bundle();
                 code.putString("id", String.valueOf(id_asignacion));
                 code.putString("id_tipoUsuario", String.valueOf(id_tipoUsuario));
+                code.putString("nombres", nombre2);
+                code.putString("nombres", cedula2);
                 Intent i = new Intent(context, Registro_Lectura.class);
                 i.putExtras(code);
                 context.startActivity(i);
@@ -106,7 +110,7 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.ViewHold
 
                 id_cliente = pago.getId_cedula();
                 nombres = pago.getNombres()+" "+pago.getApellidos();
-                nombredocumento = pago.getNombre_documento();
+                nombredocumento = pago.getNumero_cedula();
                 tipoUsuario = pago.getTipoUsuario();
                 categoria = pago.getCategoria();
                 //ubicacion = "La dirección del medidor está en "+pago.getUbicacion_asignacion()+"\nSus coordenadas son "+pago.getLatitud()+","+pago.getLongitud()+"" +
@@ -127,6 +131,8 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.ViewHold
                     public void onClick(View view) {
                         Bundle code = new Bundle();
                         code.putString("id", String.valueOf(id_cliente));
+                        code.putString("nombres", String.valueOf(nombres));
+                        code.putString("cedula", String.valueOf(nombredocumento));
                         Intent i = new Intent(context, Lista_medidores.class);
                         i.putExtras(code);
                         context.startActivity(i);

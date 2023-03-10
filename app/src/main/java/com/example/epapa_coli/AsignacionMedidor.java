@@ -24,6 +24,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -52,6 +53,7 @@ public class AsignacionMedidor extends AppCompatActivity {
 
     AutoCompleteTextView medidorList;
     EditText edtubicacion, edtlatitud, edtlongitud;
+    TextView asigCliente;
     Button btnAsignacion;
     int id_medidor, id_cliente;
     public static final int REQUEST_CODE = 1;
@@ -70,6 +72,8 @@ public class AsignacionMedidor extends AppCompatActivity {
         edtlatitud = findViewById(R.id.latitudAsignacion);
         edtlongitud = findViewById(R.id.longitudAsignacion);
         ubicacion = findViewById(R.id.ubicacion);
+        asigCliente = findViewById(R.id.asigCliente);
+
         ubicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +100,7 @@ public class AsignacionMedidor extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         id_cliente = jsonObject1.getInt("id");
-
+                        asigCliente.setText(jsonObject1.getString("nombres"));
                     }
 
                 } catch (JSONException e) {
@@ -120,7 +124,7 @@ public class AsignacionMedidor extends AppCompatActivity {
         });
     }
     public void llenarspinnerMedidor() {
-        String URL = "https://epapa-coli.es/tesis-epapacoli/listar_medidor.php";
+        String URL = "https://epapa-coli.es/tesis-epapacoli/List_medidor.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

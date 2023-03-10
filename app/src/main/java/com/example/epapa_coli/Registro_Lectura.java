@@ -29,7 +29,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,17 +44,29 @@ public class Registro_Lectura extends AppCompatActivity {
     int estadoActual,lecturaAnt;
     double desc, totalDesc, totalPagar,potable, alcantarillado;
     Button btnLecturaRegister;
-    TextView txtMen;
+    TextView txtMen, clienteLectura, cedulaLectura;
     DatePickerDialog.OnDateSetListener onDateSetListener;
-    String fecha;
+    String fecha, nombres, cedula;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_lectura);
+
+        Calendar cal = new GregorianCalendar();
+        Date date = cal.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formatteDate = df.format(date);
+
         id_cliente = getIntent().getStringExtra("id");
         id_tipoUsuario = getIntent().getStringExtra("id_tipoUsuario");
+        nombres = getIntent().getStringExtra("nombres");
+        cedula = getIntent().getStringExtra("cedula");
         txtMen = findViewById(R.id.texttipoUsuario);
+        clienteLectura = findViewById(R.id.clienteLectura);
+        cedulaLectura = findViewById(R.id.cedulaLectura);
+        clienteLectura.setText(nombres);
+        cedulaLectura.setText("C.I. "+cedula);
         if(id_tipoUsuario.equals("1") || id_tipoUsuario.equals("2")){
             desc = 0.5;
             txtMen.setText("El cliente mantiene un descuento del 50% en su consumo de agua potable y alcantarillado");
@@ -68,6 +83,7 @@ public class Registro_Lectura extends AppCompatActivity {
         edtTotal = findViewById(R.id.edtTotal);
         edtalcantarillado = findViewById(R.id.alcantarilladoRe);
         fechaRe = findViewById(R.id.fechaRe);
+        fechaRe.setText(formatteDate);
         lecturaanteriorRe = findViewById(R.id.lecturaanteriorRe);
         Fecha();
         edtlecturaactual.addTextChangedListener(new TextWatcher() {

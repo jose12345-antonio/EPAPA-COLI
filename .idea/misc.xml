@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable-v24/button_bg.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable-v24/button_white.xml" value="0.1" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/color_edit.xml" value="0.19282051282051282" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.13703703703703704" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/oval.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/drawable/toast_drawable.xml" value="0.1" />
@@ -17,6 +18,8 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_home_admin.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_home_user.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_lista_medidor.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_lista_medidor2.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_lista_medidores.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_localizacion.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_login.xml" value="0.2545454545454545" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
@@ -24,7 +27,7 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_register_code.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_register_users.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_registro_cliente.xml" value="0.1796875" />
-        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_registro_lectura.xml" value="0.1796875" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_registro_lectura.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_registro_medidor.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_reset_password.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_ubicacion.xml" value="0.1" />
@@ -50,6 +53,7 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/list_cliente.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/list_medido.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/list_medidor_cliente.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/list_pago.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/lista_pago.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/lista_pago_pdf.xml" value="0.14444444444444443" />

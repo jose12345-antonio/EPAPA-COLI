@@ -83,6 +83,56 @@
 
                     </androidx.cardview.widget.CardView>
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardLecturas"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardElevation="10dp"
+                        android:layout_margin="4dp">
+                        <LinearLayout
+                            android:layout_width="7dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:background="@color/purple_500"></LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:id="@+id/txtLecturas"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10"
+                                android:layout_gravity="center"
+                                android:textSize="80dp"
+                                android:textColor="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_baseline_person_24"
+                                    android:layout_marginRight="5dp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Lecturas"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:textSize="18sp"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/cardFacturas"
                         android:layout_width="150dp"
                         android:layout_height="150dp"

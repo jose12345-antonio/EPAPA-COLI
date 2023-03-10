@@ -1,6 +1,5 @@
 package com.example.epapa_coli.Adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,12 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.epapa_coli.DetallePago;
 import com.example.epapa_coli.ListaMedidor;
-import com.example.epapa_coli.Model.GetSetCliente;
+import com.example.epapa_coli.ListaMedidor2;
 import com.example.epapa_coli.Model.GetSetEstado;
 import com.example.epapa_coli.Model.GetSetMedidor;
-import com.example.epapa_coli.Model.GetSetTipoUsuario;
 import com.example.epapa_coli.R;
 import com.example.epapa_coli.Registro_Lectura;
 
@@ -42,14 +39,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterMedidor extends RecyclerView.Adapter<AdapterMedidor.ViewHolder>{
+public class AdapterMedidorLectura extends RecyclerView.Adapter<AdapterMedidorLectura.ViewHolder>{
 
     private LayoutInflater layoutInflater;
     private static List<GetSetMedidor> data;
-    private ListaMedidor context;
+    private ListaMedidor2 context;
     int id_cliente, id_tipoUsuario,id_asignacion, id_estadoMedidor, idmedidor;
 
-    public AdapterMedidor(List<GetSetMedidor> data, ListaMedidor context) {
+    public AdapterMedidorLectura(List<GetSetMedidor> data, ListaMedidor2 context) {
         this.data = data;
         this.context = context;
     }
@@ -74,6 +71,8 @@ public class AdapterMedidor extends RecyclerView.Adapter<AdapterMedidor.ViewHold
         holder.txt_marca.setText("Marca: "+pago.getMarca());
         holder.txt_tipo.setText("Modelo: "+pago.getTipo_material());
         holder.estadoMedidor.setText(pago.getEstado());
+
+        holder.estadoMedidor.setVisibility(View.GONE);
 
         holder.lyMedidor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +185,24 @@ public class AdapterMedidor extends RecyclerView.Adapter<AdapterMedidor.ViewHold
             }
 
         });
+        holder.registroLectura.setVisibility(View.VISIBLE);
+        holder.registroLectura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id_asignacion = pago.getId_asignacion();
+                int tipoUsuario2 = pago.getTipoUsuario();
+                String nombre2 = pago.getNombres()+" "+pago.getApellidos();
+                String cedula2 = pago.getCedula();
+                Bundle code = new Bundle();
+                code.putString("id", String.valueOf(id_asignacion));
+                code.putString("id_tipoUsuario", String.valueOf(id_tipoUsuario));
+                code.putString("nombres", nombre2);
+                code.putString("cedula", cedula2);
+                Intent i = new Intent(context, Registro_Lectura.class);
+                i.putExtras(code);
+                context.startActivity(i);
+            }
+        });
 
 
     }
@@ -196,7 +213,7 @@ public class AdapterMedidor extends RecyclerView.Adapter<AdapterMedidor.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_nombre, txt_marca, txt_tipo, estadoMedidor;
+        TextView txt_nombre, txt_marca, txt_tipo, estadoMedidor,registroLectura;
         LinearLayout lyMedidor;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -205,6 +222,7 @@ public class AdapterMedidor extends RecyclerView.Adapter<AdapterMedidor.ViewHold
             txt_tipo = itemView.findViewById(R.id.tipoMaterial);
             estadoMedidor = itemView.findViewById(R.id.estadoMedidor);
             lyMedidor = itemView.findViewById(R.id.lyMedidor);
+            registroLectura = itemView.findViewById(R.id.registroLectura);
         }
     }
 

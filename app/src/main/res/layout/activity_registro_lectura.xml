@@ -39,6 +39,28 @@
 
         </LinearLayout>
 
+            <TextView
+                android:id="@+id/clienteLectura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/purple_200"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:id="@+id/cedulaLectura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/purple_200"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -178,15 +200,15 @@
                         android:layout_marginTop="8dp"
                         android:hint="Consumo m3"
                         android:padding="10dp"
-                        app:helperText="requerido*"
-                        android:focusable="false"
-                        app:endIconMode="clear_text">
+                        android:focusable="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/consumom3Re"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_baseline_credit_card_24"
+                            android:textStyle="bold"
+                            android:background="#BBDEFB"
                             android:inputType="number"></com.google.android.material.textfield.TextInputEditText>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -208,15 +230,15 @@
                         android:layout_marginTop="8dp"
                         android:hint="Agua potable"
                         android:padding="10dp"
-                        app:helperText="requerido*"
-                        android:focusable="false"
-                        app:endIconMode="clear_text">
+                        android:focusable="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/aguapotable"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_baseline_credit_card_24"
+                            android:textStyle="bold"
+                            android:background="#BBDEFB"
                             android:inputType="numberDecimal"></com.google.android.material.textfield.TextInputEditText>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -231,15 +253,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:hint="Alcantarillado"
+                        app:hintTextColor="@color/white"
                         android:focusable="false"
-                        android:padding="10dp"
-                        app:helperText="requerido*"
-                        app:endIconMode="clear_text">
+                        android:padding="10dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/alcantarilladoRe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:background="#BBDEFB"
                             android:drawableLeft="@drawable/ic_baseline_credit_card_24"
                             android:inputType="numberDecimal"></com.google.android.material.textfield.TextInputEditText>
                     </com.google.android.material.textfield.TextInputLayout>

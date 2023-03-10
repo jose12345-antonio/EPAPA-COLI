@@ -37,6 +37,7 @@ import com.anychart.enums.MarkerType;
 import com.anychart.enums.TooltipPositionMode;
 import com.anychart.graphics.vector.Stroke;
 import com.example.epapa_coli.ListaMedidor;
+import com.example.epapa_coli.ListaMedidor2;
 import com.example.epapa_coli.Preferences;
 import com.example.epapa_coli.R;
 
@@ -53,7 +54,7 @@ public class InicioAdmin extends Fragment {
     AnyChartView anyChartView, anyChartViewLine;
     TextView txtNombre;
     String user;
-    CardView cardMedidor;
+    CardView cardMedidor, cardLeecturas;
     TextView txtTotal;
     Double total;
     String pago, medidor, cliente, facturas;
@@ -96,6 +97,13 @@ public class InicioAdmin extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), ListaMedidor.class));
+            }
+        });
+        cardLeecturas = view.findViewById(R.id.cardLecturas);
+        cardLeecturas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ListaMedidor2.class));
             }
         });
 

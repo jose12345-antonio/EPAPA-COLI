@@ -63,18 +63,20 @@ public class AsigMedidor extends AppCompatActivity {
 
         llenarspinnerMedidor();
         id_cliente = Integer.parseInt(getIntent().getStringExtra("id"));
-        medidorList = findViewById(R.id.medidorList);
-        edtubicacion = findViewById(R.id.ubicacionAsignacion);
-        edtlatitud = findViewById(R.id.latitudAsignacion);
-        edtlongitud = findViewById(R.id.longitudAsignacion);
-        ubicacion = findViewById(R.id.ubicacion);
+
+        System.out.println(""+id_cliente);
+        medidorList = findViewById(R.id.medidorList2);
+        edtubicacion = findViewById(R.id.ubicacionAsignacion2);
+        edtlatitud = findViewById(R.id.latitudAsignacion2);
+        edtlongitud = findViewById(R.id.longitudAsignacion2);
+        ubicacion = findViewById(R.id.ubicacion2);
         ubicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ObtenerCoordenadas(v);
             }
         });
-        btnAsignacion = findViewById(R.id.btnAsignacion);
+        btnAsignacion = findViewById(R.id.btnAsignacion2);
         btnAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +86,7 @@ public class AsigMedidor extends AppCompatActivity {
     }
 
     public void llenarspinnerMedidor() {
-        String URL = "https://epapa-coli.es/tesis-epapacoli/listar_medidor.php";
+        String URL = "https://epapa-coli.es/tesis-epapacoli/List_medidor.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

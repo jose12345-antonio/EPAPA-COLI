@@ -62,7 +62,7 @@ public class AdapterMedidorCliente extends RecyclerView.Adapter<AdapterMedidorCl
         final GetSetMedidorCliente pago = data.get(position);
         holder.txt_nombre.setText("N° Medidor: "+pago.getCodigo_medidor());
         holder.txt_marca.setText("Marca: "+pago.getMarca());
-        holder.txt_tipo.setText("Material: "+pago.getTipo_material());
+        holder.txt_tipo.setText("Modelo: "+pago.getTipo_material());
         holder.txt_ubicacion.setText("Ubicación: "+pago.getUbicacion());
 
 
