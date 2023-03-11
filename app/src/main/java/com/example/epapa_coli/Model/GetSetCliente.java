@@ -3,9 +3,9 @@ package com.example.epapa_coli.Model;
 public class GetSetCliente {
 
     int id_cedula, id_tipoUsuario, id_asignacion;
-    String numero_cedula, nombres, apellidos, direccion, fecha_nacimiento, tipoUsuario, nombre_documento, codigo_unico, ubicacion_asignacion, latitud, longitud, codigo_medidor, marca, tipo_material, categoria;
+    String numero_cedula, nombres, apellidos, direccion, fecha_nacimiento, tipoUsuario, nombre_documento, codigo_unico, categoria;
 
-    public GetSetCliente(int id_cedula, String numero_cedula, String nombres, String apellidos, String direccion, String fecha_nacimiento, String tipoUsuario, int id_tipoUsuario, String nombre_documento, String codigo_unico, int id_asignacion, String ubicacion_asignacion, String latitud, String longitud, String codigo_medidor, String marca, String tipo_material, String categoria) {
+    public GetSetCliente(int id_cedula, String numero_cedula, String nombres, String apellidos, String direccion, String fecha_nacimiento, String tipoUsuario, int id_tipoUsuario, String nombre_documento, String codigo_unico, String categoria) {
         this.id_cedula = id_cedula;
         this.numero_cedula = numero_cedula;
         this.nombres = nombres;
@@ -17,13 +17,17 @@ public class GetSetCliente {
         this.nombre_documento = nombre_documento;
         this.codigo_unico = codigo_unico;
         this.id_asignacion = id_asignacion;
-        this.ubicacion_asignacion = ubicacion_asignacion;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.codigo_medidor = codigo_medidor;
-        this.marca = marca;
-        this.tipo_material = tipo_material;
         this.categoria = categoria;
+
+    }
+
+
+    public String getNombre_documento() {
+        return nombre_documento;
+    }
+
+    public void setNombre_documento(String nombre_documento) {
+        this.nombre_documento = nombre_documento;
     }
 
     public String getCategoria() {
@@ -32,14 +36,6 @@ public class GetSetCliente {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public String getNombre_documento() {
-        return nombre_documento;
-    }
-
-    public void setNombre_documento(String nombre_documento) {
-        this.nombre_documento = nombre_documento;
     }
 
     public String getCodigo_unico() {
@@ -69,53 +65,6 @@ public class GetSetCliente {
         this.id_asignacion = id_asignacion;
     }
 
-    public String getUbicacion_asignacion() {
-        return ubicacion_asignacion;
-    }
-
-    public void setUbicacion_asignacion(String ubicacion_asignacion) {
-        this.ubicacion_asignacion = ubicacion_asignacion;
-    }
-
-    public String getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(String latitud) {
-        this.latitud = latitud;
-    }
-
-    public String getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(String longitud) {
-        this.longitud = longitud;
-    }
-
-    public String getCodigo_medidor() {
-        return codigo_medidor;
-    }
-
-    public void setCodigo_medidor(String codigo_medidor) {
-        this.codigo_medidor = codigo_medidor;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getTipo_material() {
-        return tipo_material;
-    }
-
-    public void setTipo_material(String tipo_material) {
-        this.tipo_material = tipo_material;
-    }
 
 
     public int getId_cedula() {

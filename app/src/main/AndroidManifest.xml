@@ -23,6 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EPAPACOLI">
         <activity
+            android:name=".Facturas_Generadas"
+            android:exported="true" />
+        <activity
+            android:name=".CardVerFactura"
+            android:exported="true" />
+        <activity
             android:name=".ListaMedidor2"
             android:exported="true" />
         <activity

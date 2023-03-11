@@ -10,21 +10,22 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/codigoPagoPDF"
+            android:id="@+id/codigoFactura"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8099505130"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/ln"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -39,7 +40,7 @@
                     android:textStyle="normal" />
 
                 <TextView
-                    android:id="@+id/fechaPagoPDF"
+                    android:id="@+id/fechaFactu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pago generado: miércoles, 25 de enero"
@@ -56,31 +57,15 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/totalFactu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/totalPagoPDF"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$ 6,47"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                    <ImageView
-                        android:id="@+id/btnVer"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginLeft="6dp"
-                        android:tint="@color/black"
-                        android:src="@drawable/ic_baseline_arrow_circle_right_24"/>
-
-
-                </LinearLayout>
-
+                    android:text="$ 6,47"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 

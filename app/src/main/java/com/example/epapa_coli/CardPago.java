@@ -21,8 +21,9 @@ import com.paymentez.android.rest.TokenCallback;
 import com.paymentez.android.rest.model.PaymentezError;
 import com.paymentez.android.view.CardMultilineWidget;
 
-public class CardPago extends AppCompatActivity {
+import java.text.DecimalFormat;
 
+public class CardPago extends AppCompatActivity {
 
     WebView webViewPago;
     String user, totalPagar, id;
@@ -40,7 +41,7 @@ public class CardPago extends AppCompatActivity {
         webViewPago.getSettings().setJavaScriptEnabled(true);
         regresarCard = findViewById(R.id.regresarCard);
         //System.out.println("https://devtesis.com/tesis-epapacoli/pago_tarjeta.php?correo="+user+"&valor="+totalPagar);
-        webViewPago.loadUrl("https://epapa-coli.es/tesis-epapacoli/pago_tarjeta.php?correo="+user+"&valor="+totalPagar+"&id="+id);
+        webViewPago.loadUrl("https://epapa-coli.es/tesis-epapacoli/pago_tarjeta.php?correo="+user+"&valor="+obtieneDosDecimales(Double.parseDouble(totalPagar))+"&id="+id);
 
         regresarCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,5 +51,10 @@ public class CardPago extends AppCompatActivity {
             }
         });
 
+    }
+    private String obtieneDosDecimales(double valor){
+        DecimalFormat format = new DecimalFormat();
+        format.setMaximumFractionDigits(2); //Define 2 decimales.
+        return format.format(valor);
     }
 }

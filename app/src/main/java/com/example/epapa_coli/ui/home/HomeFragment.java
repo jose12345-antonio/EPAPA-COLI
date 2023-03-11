@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.epapa_coli.Adapter.AdapterListPago;
 import com.example.epapa_coli.DetallePago;
+import com.example.epapa_coli.Facturas_Generadas;
 import com.example.epapa_coli.Model.GetSetPago;
 import com.example.epapa_coli.Preferences;
 import com.example.epapa_coli.R;
@@ -38,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -159,9 +161,11 @@ public class HomeFragment extends Fragment {
                         for(int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             estado = jsonObject1.getInt("estado_pago");
-                            txttotalFactura.setText("$ "+jsonObject1.getString("total"));
+                            Double valor = jsonObject1.getDouble("total");
                             txtmedidor.setText("Nro° "+jsonObject1.getString("numero_medidor"));
+                            txttotalFactura.setText("$ "+obtieneDosDecimales(valor));
                         }
+
                         if (estado==1){
                             txtestado.setText("Pagado");
                             txttotalFactura.setText("$ 0.00");
@@ -176,7 +180,7 @@ public class HomeFragment extends Fragment {
                                     txtestado.setText("Pagado");
                                 }else if(estado==0) {
                                     txtestado.setText("Pendiente");
-                                    startActivity(new Intent(getContext(), DetallePago.class));
+                                    startActivity(new Intent(getContext(), Facturas_Generadas.class));
                                 }
                             }
                         });
@@ -241,4 +245,9 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private String obtieneDosDecimales(double valor){
+        DecimalFormat format = new DecimalFormat();
+        format.setMaximumFractionDigits(2); //Define 2 decimales.
+        return format.format(valor);
+    }
 }

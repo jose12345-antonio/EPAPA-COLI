@@ -44,6 +44,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -57,6 +58,7 @@ public class DetallePago extends AppCompatActivity {
     Button btnPagar;
     String latitud, longitud;
     public static final int REQUEST_CODE = 1;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class DetallePago extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_pago);
         user =  Preferences.obtenerPreferenceString(getApplicationContext(), Preferences.PREFERENCE_USUARIO_LOGIN);
         ObtenerCoordenadas();
+        id = Integer.parseInt(getIntent().getStringExtra("id"));
 
         txtConsumoAnterior = findViewById(R.id.consumoAnterior);
         txtConsumoActual = findViewById(R.id.consumoActual);
@@ -109,7 +112,7 @@ public class DetallePago extends AppCompatActivity {
 
 
     private void obtenerFactura() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/mostrarFactura.php?correo="+user, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://epapa-coli.es/tesis-epapacoli/mostrarFactura2.php?factura="+id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -120,12 +123,12 @@ public class DetallePago extends AppCompatActivity {
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         id_factura = jsonObject1.getInt("id_factura");
-                        txtConsumoActual.setText(jsonObject1.getString("valor_lectura"));
+                        txtConsumoActual.setText(obtieneDosDecimales(Double.parseDouble(jsonObject1.getString("valor_lectura"))));
                         consumoActual = jsonObject1.getInt("valor_lectura");
-                        txtConsumo.setText(jsonObject1.getString("consumo_m3"));
+                        txtConsumo.setText(obtieneDosDecimales(Double.parseDouble(jsonObject1.getString("consumo_m3"))));
                         valorconsumo = jsonObject1.getInt("consumo_m3");
-                        txttotalMes.setText("$ "+jsonObject1.getString("total"));
-                        txttotalPagar.setText("$ "+jsonObject1.getString("total"));
+                        txttotalMes.setText("$ "+obtieneDosDecimales(Double.parseDouble(jsonObject1.getString("total"))));
+                        txttotalPagar.setText("$ "+obtieneDosDecimales(Double.parseDouble(jsonObject1.getString("total"))));
                         pagartotal = jsonObject1.getString("total");
                         txtaguapotable.setText("$ "+jsonObject1.getString("agua_potable"));
                         txtalcantarillado.setText("$ "+jsonObject1.getString("alcantarillado"));
@@ -362,5 +365,11 @@ public class DetallePago extends AppCompatActivity {
         textView.setText("Su ubicación está dentro de la ubicación del Cantón Colimes. \nProceder a Pagar.");
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    private String obtieneDosDecimales(double valor){
+        DecimalFormat format = new DecimalFormat();
+        format.setMaximumFractionDigits(2); //Define 2 decimales.
+        return format.format(valor);
     }
 }

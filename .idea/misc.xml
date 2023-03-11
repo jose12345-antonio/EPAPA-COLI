@@ -13,8 +13,10 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_asig_medidor.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_asignacion_medidor.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_card_pago.xml" value="0.1" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_card_ver_factura.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_confirm_update_password.xml" value="0.1" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_detalle_pago.xml" value="0.15925925925925927" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_facturas_generadas.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_home_admin.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_home_user.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/activity_lista_medidor.xml" value="0.1796875" />
@@ -55,6 +57,7 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/list_medido.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/list_medidor_cliente.xml" value="0.1796875" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/list_pago.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/lista_facturas.xml" value="0.3236514522821577" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/lista_pago.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/lista_pago_pdf.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/EPAPACOLI/app/src/main/res/layout/toast_error.xml" value="0.14666666666666667" />
