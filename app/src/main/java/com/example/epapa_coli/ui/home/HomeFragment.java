@@ -158,6 +158,7 @@ public class HomeFragment extends Fragment {
                             }
                         });
                     }else{
+                        Double suma=0.0;
                         for(int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             estado = jsonObject1.getInt("estado_pago");

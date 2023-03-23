@@ -151,7 +151,7 @@ public class AdapterMedidor extends RecyclerView.Adapter<AdapterMedidor.ViewHold
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(context, "Actualizado con éxito", Toast.LENGTH_SHORT).show();
-                                context.finish();
+                                context.startActivity(new Intent(context, ListaMedidor.class));
                                 //sendMail();
                             }
                         }, new Response.ErrorListener() {

@@ -2,6 +2,7 @@ package com.example.epapa_coli.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,13 +47,11 @@ public class AdapterListPagoPDF extends RecyclerView.Adapter<AdapterListPagoPDF.
         holder.btnVer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GetSetPago pago = data.get(position);
                 String id = String.valueOf(pago.getId_pago());
-                //Toast.makeText(context, ""+id, Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(context, CardVerFactura.class);
-                i.putExtra("id", id);
-                context.startActivity(i);
+                Uri uri = Uri.parse("https://epapa-coli.es/tesis-epapacoli/reportes/report.php?id_factura="+id);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                context.startActivity(intent);
+
             }
         });
     }

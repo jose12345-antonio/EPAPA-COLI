@@ -62,7 +62,6 @@ public class UpdatePassword extends AppCompatActivity {
                 ActualizarDatosPasword(URL);
             }
         });
-
     }
 
     private boolean validarPassword() {
